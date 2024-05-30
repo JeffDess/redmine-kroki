@@ -1,0 +1,23 @@
+<%= stylesheet_link_tag "settings", plugin: "redmine_kroki" %>
+<p>
+  Most diagrams types are supported out of the box, however you may chose to
+  disable some of the companion services.
+</p>
+<p>
+  <span class="kroki-option">
+    <%= label_tag :settings_kroki_bpmn, "BPMN" %>
+    <%= check_box_tag "settings[kroki_bpmn]", 1, @settings["kroki_bpmn"] %>
+  </span>
+  <span class="kroki-option">
+    <%= label_tag :settings_kroki_excalidraw, "Excalidraw" %>
+    <%= check_box_tag "settings[kroki_excalidraw]", 1, @settings["kroki_excalidraw"] %>
+  </span>
+  <span class="kroki-option">
+    <%= label_tag :settings_kroki_mermaid, "Mermaid" %>
+    <%= check_box_tag "settings[kroki_mermaid]", 1, @settings["kroki_mermaid"] %>
+  </span>
+  <span class="kroki-option">
+    <%= label_tag :settings_kroki_diagramsnet, "Diagrams.net" %>
+    <%= check_box_tag "settings[kroki_diagramsnet]", 1, @settings["kroki_diagramsnet"] %>
+  </span>
+</p>

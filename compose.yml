@@ -1,0 +1,57 @@
+services:
+  redmine:
+    image: redmine:5-alpine
+    ports:
+      - 8080:3000
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: pass
+    volumes:
+      - ./src:/usr/src/redmine/plugins/redmine_kroki
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: redmine
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./database/data:/var/lib/mysql
+    restart: always
+
+  kroki:
+      image: yuzutech/kroki
+      environment:
+        - KROKI_MERMAID_HOST=mermaid
+        - KROKI_BPMN_HOST=bpmn
+        - KROKI_EXCALIDRAW_HOST=excalidraw
+      ports:
+        - "8000:8000"
+
+  mermaid:
+    image: yuzutech/kroki-mermaid
+    ports:
+      - "8002:8002"
+
+  bpmn:
+    image: yuzutech/kroki-bpmn
+    ports:
+      - "8003:8003"
+
+  excalidraw:
+    image: yuzutech/kroki-excalidraw
+    ports:
+      - "8004:8004"
+
+  diagramsnet:
+    image: yuzutech/kroki-diagramsnet
+    ports:
+      - "8005:8005"

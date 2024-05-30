@@ -1,0 +1,18 @@
+.kroki-option {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: left;
+  margin: 1em;
+}
+
+.tabular label {
+  text-align: left;
+}
+
+.tabular.settings label {
+  margin-left: unset;
+}
+
+.tabular.settings * {
+  padding-left: unset !important;
+}
