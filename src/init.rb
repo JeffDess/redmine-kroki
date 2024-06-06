@@ -24,8 +24,8 @@ Redmine::Plugin.register :redmine_kroki do
       extend RedmineKrokiHelper
       diagram_type = args.first
       res = send_kroki_request(diagram_type, text)
-      out = res.html_safe
-      out
+
+      res.html_safe
     end
   end
 end
