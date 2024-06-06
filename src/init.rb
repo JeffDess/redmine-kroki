@@ -18,7 +18,7 @@ Redmine::Plugin.register :redmine_kroki do
     macro :kroki do |_obj, args, text|
       extend RedmineKrokiHelper
       diagram_type = args.first
-      res = send_kroki_request(diagram_type, text)
+      res = convert_diagram(diagram_type, text)
 
       res.html_safe
     end
