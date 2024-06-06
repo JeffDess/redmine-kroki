@@ -5,7 +5,7 @@ module RedmineKrokiHelper
   require 'uri'
 
   def send_kroki_request(diagram_type, diagram_content)
-    endpoint = Setting.plugin_redmine_kroki['kroki_endpoint']
+    endpoint = Setting.plugin_redmine_kroki['kroki_url']
     url = URI.parse("#{endpoint}/#{diagram_type}/svg")
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Post.new(url.path)

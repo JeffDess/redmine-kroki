@@ -1,14 +1,14 @@
 <%= stylesheet_link_tag "settings", plugin: "redmine_kroki" %>
 <div class="kroki-desc">
-  <p>Configure your Kroki endpoint below if you have a different Kroki server
+  <p>Configure your Kroki server URL below if you have a different location
     than default installation.</p>
 </div>
 <fieldset class="kroki-fieldset">
   <legend class="kroki-legend">Kroki Server</legend>
   <span class="kroki-textfield">
-    <%= label_tag :settings_kroki_endpoint, "Endpoint:" %>
-    <%= text_field_tag "settings[kroki_endpoint]",
-    @settings["kroki_endpoint"],
+    <%= label_tag :settings_kroki_url, "URL:" %>
+    <%= text_field_tag "settings[kroki_url]",
+    @settings["kroki_url"],
     size: 100 %>
   </span>
 </fieldset>
