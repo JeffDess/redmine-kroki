@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-include RedmineKrokiHelper
-
 Redmine::Plugin.register :redmine_kroki do
   name 'Redmine Kroki Plugin'
   author 'Jean-François Dessureault'
@@ -24,6 +22,7 @@ Redmine::Plugin.register :redmine_kroki do
          }\
          }}"
     macro :kroki do |_obj, args, text|
+      extend RedmineKrokiHelper
       diagram_type = args.first
       res = send_kroki_request(diagram_type, text)
       out = res.html_safe
