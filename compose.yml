@@ -28,12 +28,12 @@ services:
     restart: always
 
   kroki:
-      image: yuzutech/kroki
-      environment:
-        - KROKI_MERMAID_HOST=mermaid
-        - KROKI_BPMN_HOST=bpmn
-        - KROKI_EXCALIDRAW_HOST=excalidraw
-        - KROKI_DIAGRAMSNET_HOST=diagramsnet
+    image: yuzutech/kroki
+    environment:
+      - KROKI_MERMAID_HOST=mermaid
+      - KROKI_BPMN_HOST=bpmn
+      - KROKI_EXCALIDRAW_HOST=excalidraw
+      - KROKI_DIAGRAMSNET_HOST=diagramsnet
 
   mermaid:
     image: yuzutech/kroki-mermaid
