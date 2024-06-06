@@ -1,5 +1,6 @@
-include RedmineKrokiHelper
 # frozen_string_literal: true
+
+include RedmineKrokiHelper
 
 Redmine::Plugin.register :redmine_kroki do
   name 'Redmine Kroki Plugin'
@@ -9,7 +10,7 @@ Redmine::Plugin.register :redmine_kroki do
   url 'https://github.com/jeffdess/redmine-kroki'
   author_url 'https://github.com/jeffdess'
 
-  settings default: { 'kroki_endpoint' => 'http://kroki' },
+  settings default: { 'kroki_endpoint' => 'http://kroki:8000' },
            partial: 'settings/redmine-kroki_settings'
 
   Redmine::WikiFormatting::Macros.register do
