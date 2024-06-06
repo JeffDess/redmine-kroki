@@ -6,7 +6,7 @@ module RedmineKrokiHelper
   require 'uri'
 
   def send_kroki_request(diagram_type, diagram_content)
-    return macro_error('You must provide the diagram type') if diagram_type.nil?
+    raise 'Missing diagram type' if diagram_type.nil?
 
     endpoint = Setting.plugin_redmine_kroki['kroki_url']
     url = URI.parse("#{endpoint}/#{diagram_type}/svg")
@@ -18,10 +18,8 @@ module RedmineKrokiHelper
 
     response = http.request(request)
 
-    response.body
-  end
+    raise "Cannot find the diagram \"#{diagram_type}\"" if response.code == '404'
 
-  def macro_error(msg)
-    "<span style='color: red'>Kroki Macro Error: #{msg}.</span>"
+    response.body
   end
 end
