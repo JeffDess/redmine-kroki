@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Utility functions for the Redmine-Kroki plugin
 module RedmineKrokiHelper
   require 'net/http'
   require 'uri'
