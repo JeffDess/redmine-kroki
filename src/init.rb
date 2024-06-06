@@ -1,3 +1,4 @@
+include RedmineKrokiHelper
 # frozen_string_literal: true
 
 Redmine::Plugin.register :redmine_kroki do
@@ -24,13 +25,14 @@ Redmine::Plugin.register :redmine_kroki do
   Redmine::WikiFormatting::Macros.register do
     desc "Add Kroki graphs with a macro. \
          Example:\
-         {{kroki-plantuml\
+         {{kroki(mermaid)\
             ...\
          }}"
-    macro :kroki do |_obj, _args, text|
-      divid = "kroki_#{SecureRandom.alphanumeric(16)}"
-      out = ''.html_safe
-      out << content_tag(:div, text, id: divid, class: 'kroki')
+    macro :kroki do |_obj, args, text|
+      diagram_type = args.first
+      res = send_kroki_request(diagram_type, text)
+
+      out = res.html_safe
       out
     end
   end
