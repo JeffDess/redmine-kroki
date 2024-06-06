@@ -12,7 +12,7 @@ Redmine::Plugin.register :redmine_kroki do
            partial: 'settings/redmine-kroki_settings'
 
   Redmine::WikiFormatting::Macros.register do
-    desc "Renders a diagram with Kroki.\n" +
+    desc "Renders a diagram from textual description with Kroki.\n" +
          "Provide the diagram type as the first argument.\nExample:\n\n" +
          "{{kroki(mermaid)\nflowchart LR\n  Hello --> World\n}}"
     macro :kroki do |_obj, args, text|
