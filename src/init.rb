@@ -12,14 +12,9 @@ Redmine::Plugin.register :redmine_kroki do
            partial: 'settings/redmine-kroki_settings'
 
   Redmine::WikiFormatting::Macros.register do
-    desc "Render graphs in wikis and issues with Kroki.\
-         Use 'kroki' as the macro name and the diagram_type as the argument.\
-         \
-         Example:\
-         {{kroki(mermaid)\
-         flowchart LR\
-           Hello --> World\
-         }}"
+    desc "Renders a diagram with Kroki.\n" +
+         "Provide the diagram type as the first argument.\nExample:\n\n" +
+         "{{kroki(mermaid)\nflowchart LR\n  Hello --> World\n}}"
     macro :kroki do |_obj, args, text|
       extend RedmineKrokiHelper
       diagram_type = args.first
