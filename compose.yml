@@ -34,25 +34,15 @@ services:
         - KROKI_BPMN_HOST=bpmn
         - KROKI_EXCALIDRAW_HOST=excalidraw
         - KROKI_DIAGRAMSNET_HOST=diagramsnet
-      ports:
-        - "8000:8000"
 
   mermaid:
     image: yuzutech/kroki-mermaid
-    ports:
-      - "8002:8002"
 
   bpmn:
     image: yuzutech/kroki-bpmn
-    ports:
-      - "8003:8003"
 
   excalidraw:
     image: yuzutech/kroki-excalidraw
-    ports:
-      - "8004:8004"
 
   diagramsnet:
     image: yuzutech/kroki-diagramsnet
-    ports:
-      - "8005:8005"
