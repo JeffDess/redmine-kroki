@@ -19,6 +19,7 @@ module RedmineKrokiHelper
     response = http.request(request)
 
     raise "Cannot find the diagram \"#{diagram_type}\"" if response.code == '404'
+    raise response.body if response.code == '400'
 
     response.body
   end
