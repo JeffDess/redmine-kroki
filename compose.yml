@@ -33,6 +33,7 @@ services:
         - KROKI_MERMAID_HOST=mermaid
         - KROKI_BPMN_HOST=bpmn
         - KROKI_EXCALIDRAW_HOST=excalidraw
+        - KROKI_DIAGRAMSNET_HOST=diagramsnet
       ports:
         - "8000:8000"
 
