@@ -1,76 +1,14 @@
 <%= stylesheet_link_tag "settings", plugin: "redmine_kroki" %>
 <div class="kroki-desc">
-  <p>
-    Most diagrams types are supported out of the box, however you may chose to
-    disable some of the companion services.
-  </p>
+  <p>Configure your Kroki endpoint below if you have a different Kroki server
+    than default installation.</p>
 </div>
-<p>
-  <fieldset class="kroki-fieldset">
-    <legend class="kroki-legend">Kroki</legend>
-    <span class="kroki-textfield">
-      <%= label_tag :settings_kroki_endpoint, "Endpoint:" %>
-      <%= text_field_tag "settings[kroki_endpoint]",
-      @settings["kroki_endpoint"],
-      size: 100 %>
-    </span>
-  </fieldset>
-  <fieldset class="kroki-fieldset">
-    <legend class="kroki-legend">BPMN</legend>
-    <span class="kroki-checkbox">
-      <%= label_tag :settings_kroki_bpmn_enabled, "Enabled:" %>
-      <%= check_box_tag "settings[kroki_bpmn_enabled]", 1, @settings["kroki_bpmn_enabled"] %>
-    </span>
-    <span class="kroki-textfield">
-      <%= label_tag :settings_kroki_bpmn_endpoint, "Endpoint:" %>
-      <%= text_field_tag "settings[kroki_bpmn_endpoint]",
-      @settings["kroki_bpmn_endpoint"],
-      size: 100 %>
-    </span>
-  </fieldset>
-  <fieldset class="kroki-fieldset">
-    <legend class="kroki-legend">Excalidraw</legend>
-    <span class="kroki-checkbox">
-      <%= label_tag :settings_kroki_excalidraw_enabled, "Enabled:" %>
-      <%= check_box_tag "settings[kroki_excalidraw_enabled]",
-      1,
-      @settings["kroki_excalidraw_enabled"] %>
-    </span>
-    <span class="kroki-textfield">
-      <%= label_tag :settings_kroki_excalidraw_endpoint, "Endpoint:" %>
-      <%= text_field_tag "settings[kroki_excalidraw_endpoint]",
-      @settings["kroki_excalidraw_endpoint"],
-      size: 100 %>
-    </span>
-  </fieldset>
-  <fieldset class="kroki-fieldset">
-    <legend class="kroki-legend">Mermaid</legend>
-    <span class="kroki-checkbox">
-      <%= label_tag :settings_kroki_mermaid_enabled, "Enabled:" %>
-      <%= check_box_tag "settings[kroki_mermaid_enabled]",
-      1,
-      @settings["kroki_mermaid_enabled"] %>
-    </span>
-    <span class="kroki-textfield">
-      <%= label_tag :settings_kroki_mermaid_endpoint, "Endpoint:" %>
-      <%= text_field_tag "settings[kroki_mermaid_endpoint]",
-      @settings["kroki_mermaid_endpoint"],
-      size: 100 %>
-    </span>
-  </fieldset>
-  <fieldset class="kroki-fieldset">
-    <legend class="kroki-legend">Diagrams.net</legend>
-    <span class="kroki-checkbox">
-      <%= label_tag :settings_kroki_diagramsnet_enabled, "Enabled:" %>
-      <%= check_box_tag "settings[kroki_diagramsnet_enabled]",
-      1,
-      @settings["kroki_diagramsnet_enabled"] %>
-    </span>
-    <span class="kroki-textfield">
-      <%= label_tag :settings_kroki_bpmn_endpoint, "Endpoint:" %>
-      <%= text_field_tag "settings[kroki_diagramsnet_endpoint]",
-      @settings["kroki_diagramsnet_endpoint"],
-      size: 100 %>
-    </span>
-  </fieldset>
-</p>
+<fieldset class="kroki-fieldset">
+  <legend class="kroki-legend">Kroki Server</legend>
+  <span class="kroki-textfield">
+    <%= label_tag :settings_kroki_endpoint, "Endpoint:" %>
+    <%= text_field_tag "settings[kroki_endpoint]",
+    @settings["kroki_endpoint"],
+    size: 100 %>
+  </span>
+</fieldset>
