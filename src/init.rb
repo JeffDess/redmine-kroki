@@ -13,15 +13,18 @@ Redmine::Plugin.register :redmine_kroki do
            partial: 'settings/redmine-kroki_settings'
 
   Redmine::WikiFormatting::Macros.register do
-    desc "Add Kroki graphs with a macro. \
+    desc "Render graphs in wikis and issues with Kroki.\
+         Use 'kroki' as the macro name and the diagram_type as the argument.\
+         \
          Example:\
-         {{kroki(mermaid)\
-            ...\
+         {{kroki(graphviz)\
+         digraph G {\
+           Hello->World\
+         }\
          }}"
     macro :kroki do |_obj, args, text|
       diagram_type = args.first
       res = send_kroki_request(diagram_type, text)
-
       out = res.html_safe
       out
     end
