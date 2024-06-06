@@ -16,10 +16,9 @@ Redmine::Plugin.register :redmine_kroki do
          Use 'kroki' as the macro name and the diagram_type as the argument.\
          \
          Example:\
-         {{kroki(graphviz)\
-         digraph G {\
-           Hello->World\
-         }\
+         {{kroki(mermaid)\
+         flowchart LR\
+           Hello --> World\
          }}"
     macro :kroki do |_obj, args, text|
       extend RedmineKrokiHelper
