@@ -23,6 +23,10 @@
   justify-content: left;
 }
 
+.kroki-textfield input {
+  width: 100%;
+}
+
 .kroki-checkbox label {
   margin-right: 1.3em !important;
 }
