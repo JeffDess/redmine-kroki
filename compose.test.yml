@@ -1,14 +1,13 @@
-name: redmine_kroki
+name: redmine_kroki_test
 include:
   - compose.kroki.yml
 services:
   redmine:
     image: redmine:5-alpine
-    ports:
-      - 8080:3000
     environment:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: pass
+      RAILS_ENV: test
     volumes:
       - ./src:/usr/src/redmine/plugins/redmine_kroki
     depends_on:
@@ -26,6 +25,5 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    volumes:
-      - ./database/data:/var/lib/mysql
     restart: always
+
