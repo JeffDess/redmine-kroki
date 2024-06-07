@@ -68,4 +68,24 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     diagram = convert_diagram(url, 'blockdiag', 'blockdiag {a -> b}')
     assert_match(/<svg/, diagram)
   end
+
+  test 'convert_diagram renders seqdiag' do
+    diagram = convert_diagram(url, 'seqdiag', 'seqdiag {a -> b}')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders actdiag' do
+    diagram = convert_diagram(url, 'actdiag', 'actdiag {a -> b}')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders rackdiag' do
+    diagram = convert_diagram(url, 'rackdiag', 'rackdiag {2U;1:A}')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders D2' do
+    diagram = convert_diagram(url, 'd2', 'a -> b')
+    assert_match(/<svg/, diagram)
+  end
 end
