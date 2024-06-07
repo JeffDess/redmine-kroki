@@ -1,0 +1,20 @@
+services:
+  kroki:
+    image: yuzutech/kroki
+    environment:
+      - KROKI_MERMAID_HOST=mermaid
+      - KROKI_BPMN_HOST=bpmn
+      - KROKI_EXCALIDRAW_HOST=excalidraw
+      - KROKI_DIAGRAMSNET_HOST=diagramsnet
+
+  mermaid:
+    image: yuzutech/kroki-mermaid
+
+  bpmn:
+    image: yuzutech/kroki-bpmn
+
+  excalidraw:
+    image: yuzutech/kroki-excalidraw
+
+  diagramsnet:
+    image: yuzutech/kroki-diagramsnet
