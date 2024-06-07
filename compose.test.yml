@@ -26,4 +26,3 @@ services:
       timeout: 5s
       retries: 5
     restart: always
-
