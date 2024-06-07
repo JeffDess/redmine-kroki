@@ -17,8 +17,9 @@ Redmine::Plugin.register :redmine_kroki do
          "{{kroki(mermaid)\nflowchart LR\n  Hello --> World\n}}"
     macro :kroki do |_obj, args, text|
       extend RedmineKrokiHelper
+      kroki_url = Setting.plugin_redmine_kroki['kroki_url']
       diagram_type = args.first
-      res = convert_diagram(diagram_type, text)
+      res = convert_diagram(kroki_url, diagram_type, text)
 
       res.html_safe
     end
