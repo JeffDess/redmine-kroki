@@ -4,8 +4,10 @@ on:
   push:
     tags:
       - '*'
+
 permissions:
   contents: write
+
 jobs:
   build:
     name: Release
@@ -18,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Bundle src directory as redmine_kroki.zip
-        run: zip -r redmine_kroki.zip src
+        run: mv src redmine_kroki && zip -r redmine_kroki.zip redmine_kroki
 
       - name: Release
         uses: softprops/action-gh-release@v1
