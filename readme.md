@@ -3,6 +3,8 @@
 This plugin renders plain text diagrams to images in Redmine issues and
 wiki pages.
 
+![PlantUML Mindmap Example](doc/img/wiki-plantuml_mindmap.png)
+
 ## Features
 
 * Renders 30+ diagram types, including Mermaid, PlantUML, BPMN, Excalidraw and
@@ -54,7 +56,7 @@ number (typically 8000).
 
 ## Usage
 
-Input a diagram in a kroki macro and pass the digaram type as an argument.
+Input a diagram in a kroki macro and pass the diagram type as an argument.
 
 * Choose from this list of [supported diagram types](https://kroki.io/#support)
   \+ `diagramsnet`
