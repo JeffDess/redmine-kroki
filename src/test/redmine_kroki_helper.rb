@@ -64,6 +64,12 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram with spaces in diagram type still renders' do
+    diagram = convert_diagram(url, 'c4 plantuml', '!include <C4/C4_Context>
+      Person(a, "")')
+    assert_match(/<svg/, diagram)
+  end
+
   test 'convert_diagram renders graphviz' do
     diagram = convert_diagram(url, 'graphviz', 'digraph G {a->b}')
     assert_match(/<svg/, diagram)

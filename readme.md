@@ -62,7 +62,7 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
 
 * Choose from this list of [supported diagram types](https://kroki.io/#support)
   \+ `diagramsnet`
-* Enter the diagram type as alpha-numeric characters (no spaces or hyphens)
+* Enter the diagram type as alpha-numeric characters
 
 ✅ Correct
 
@@ -84,10 +84,6 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
 
 ```markdown
 {{kroki
-...
-}}
-
-{{kroki(C4 PlantUML)
 ...
 }}
 
