@@ -43,7 +43,10 @@ jobs:
         with:
           fetch-depth: 0
       - name: Bundle
-        run: mv src redmine_kroki && zip -r redmine_kroki.zip redmine_kroki
+        run: |
+          mv src redmine_kroki
+          zip -r redmine_kroki.zip redmine_kroki
+          zip -d redmine_kroki.zip test
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
