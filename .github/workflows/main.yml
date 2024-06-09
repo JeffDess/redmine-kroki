@@ -1,4 +1,10 @@
-on: [push]
+on:
+  push:
+    paths-ignore:
+      - '.editorconfig'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '!**.md'
+      - 'doc/**'
 
 permissions:
   contents: write
