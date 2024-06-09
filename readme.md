@@ -109,7 +109,7 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
    from your Redmine server and it should return a 200 response within a few
    milliseconds.
 
-1. **When I insert a diagram with the macro, it get a 400 error.**
+1. **When I insert a diagram with the macro, I get a 400 error.**
 
    You have a syntax error in your diagram, the error message should help you
    to spot it. Review your content and try again.
