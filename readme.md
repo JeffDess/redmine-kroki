@@ -11,7 +11,7 @@ wiki pages.
   Draw.io/Diagrams.net (experimental).
 * 🚀 Offloads the rendering of diagrams to external servers. No dependencies
 to download.
-* 📥 Embeds SVG markup in the page, so it's versioned with at every save and
+* 📥 Embeds SVG markup in the page, so it's versioned at every save and
   there are files to deal with!
 
 ## Prerequisites
