@@ -7,16 +7,18 @@ wiki pages.
 
 ## Features
 
-* Renders 30+ diagram types, including Mermaid, PlantUML, BPMN, Excalidraw and
-  Draw.io/Diagrams.net (experimental).
-* Offloads the rendering of diagrams to external servers.
-* Embeds SVG markup in the page, so it's versionned with your page and no files
-  to deal with!
+* 📊 Renders 30+ diagram types including Mermaid, PlantUML, BPMN, Excalidraw and
+  Draw.io/Diagrams.net (experimental).
+* 🚀 Offloads the rendering of diagrams to external servers. No dependency
+to download.
+* 📥 Embeds SVG markup in the page, so it's versioned with at every save and
+  there are files to deal with!
 
 ## Prerequisites
 
 * A Redmine installation (only v5 tested so far)
-* A Kroki server with optional services (Mermaid, BPML, Excalidraw and Diagrams.net)
+* A Kroki server with optional services (Mermaid, BPML, Excalidraw and
+  Diagrams.net)
 
 ### Suggested setup
 
@@ -118,9 +120,13 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
    The corresponding service is either not installed, not running or unreachable
    from your Kroki server. Check their status and try again.
 
+If you run into other problems, please feel free to [open an issue](issues).
+
 ## Development Environment
 
 ### Quickstart
+
+**Prequisite**: Docker and Docker Compose installed
 
 1. Clone this repository
 2. Run `docker-compose up`
