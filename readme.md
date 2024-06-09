@@ -37,7 +37,7 @@ just make sure the Kroki server is reacheable from your Redmine instance.
 ## Installation
 
 1. Meet the prerequisites if you haven't done so already.
-1. Download a release (not available yet)
+1. Download a [release](//github.com/JeffDess/redmine-kroki/releases).
 1. Extract the archive into the _/plugins_ directory of your Redmine server.
 1. Restart your Redmine server.
 
@@ -120,7 +120,7 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
    The corresponding service is either not installed, not running or unreachable
    from your Kroki server. Check their status and try again.
 
-If you run into other problems, please feel free to [open an issue](issues).
+If you run into other problems, please feel free to [open an issue](//github.com/JeffDess/redmine-kroki/issues/new/choose).
 
 ## Development Environment
 
