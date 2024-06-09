@@ -99,4 +99,10 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     diagram = convert_diagram(url, 'd2', 'a -> b')
     assert_match(/<svg/, diagram)
   end
+
+  test 'convert_diagram renders C4' do
+    diagram = convert_diagram(url, 'c4plantuml', '!include <C4/C4_Context>
+      Person(a, "")')
+    assert_match(/<svg/, diagram)
+  end
 end
