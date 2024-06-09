@@ -1,27 +1,42 @@
-name: Publish
-
-on:
-  push:
-    tags:
-      - '*'
+on: [push]
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Yamllint
+        uses: karancode/yamllint-github-action@master
+        with:
+          yamllint_config_filepath: .yamllint.yml
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Test
+        run: scripts/test.sh
+
+  release:
     name: Release
     runs-on: ubuntu-latest
+    if: github.ref_type == 'tag'
+    needs: [lint, test]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - name: Bundle src directory as redmine_kroki.zip
+      - name: Bundle
         run: mv src redmine_kroki && zip -r redmine_kroki.zip redmine_kroki
-
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
