@@ -70,6 +70,15 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram with hypen in diagram type still renders' do
+    diagram = convert_diagram(url, 'vega-lite', '{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "values": [{"name": 1, "value": 1}] },
+      "mark": "arc"
+    }')
+    assert_match(/<svg/, diagram)
+  end
+
   test 'convert_diagram renders graphviz' do
     diagram = convert_diagram(url, 'graphviz', 'digraph G {a->b}')
     assert_match(/<svg/, diagram)

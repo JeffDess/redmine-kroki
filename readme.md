@@ -86,10 +86,6 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
 {{kroki
 ...
 }}
-
-{{kroki(vega-lite)
-...
-}}
 ```
 
 ## Troubleshooting
