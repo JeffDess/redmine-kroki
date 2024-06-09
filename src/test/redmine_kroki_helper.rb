@@ -59,6 +59,11 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram with uppercase in diagram type still renders' do
+    diagram = convert_diagram(url, 'Mermaid', 'flowchart LR;  a --> b')
+    assert_match(/<svg/, diagram)
+  end
+
   test 'convert_diagram renders graphviz' do
     diagram = convert_diagram(url, 'graphviz', 'digraph G {a->b}')
     assert_match(/<svg/, diagram)

@@ -18,7 +18,7 @@ module RedmineKrokiHelper
   end
 
   def send_kroki_request(kroki_url, diagram_type, diagram_content)
-    url = URI.parse("#{kroki_url}/#{diagram_type}/svg")
+    url = URI.parse("#{kroki_url}/#{diagram_type.downcase}/svg")
     http = Net::HTTP.new(url.host, url.port)
     req = Net::HTTP::Post.new(url.path)
 
