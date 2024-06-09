@@ -9,7 +9,7 @@ wiki pages.
 
 * 📊 Renders 30+ diagram types including Mermaid, PlantUML, BPMN, Excalidraw and
   Draw.io/Diagrams.net (experimental).
-* 🚀 Offloads the rendering of diagrams to external servers. No dependency
+* 🚀 Offloads the rendering of diagrams to external servers. No dependencies
 to download.
 * 📥 Embeds SVG markup in the page, so it's versioned with at every save and
   there are files to deal with!
