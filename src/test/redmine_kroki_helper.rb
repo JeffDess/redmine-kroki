@@ -105,4 +105,13 @@ class RedmineKrokiHelperTest < ActionView::TestCase
       Person(a, "")')
     assert_match(/<svg/, diagram)
   end
+
+  test 'convert_diagram renders vegalite' do
+    diagram = convert_diagram(url, 'vegalite', '{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "values": [{"name": 1, "value": 1}] },
+      "mark": "arc"
+    }')
+    assert_match(/<svg/, diagram)
+  end
 end
