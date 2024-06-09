@@ -1,4 +1,4 @@
-on:
+'on':
   push:
     paths-ignore:
       - '.editorconfig'
@@ -20,6 +20,7 @@ jobs:
         uses: karancode/yamllint-github-action@master
         with:
           yamllint_config_filepath: .yamllint.yml
+          yamllint_strict: true
 
   test:
     name: Test
