@@ -46,7 +46,7 @@ jobs:
         run: |
           mv src redmine_kroki
           zip -r redmine_kroki.zip redmine_kroki
-          zip -d redmine_kroki.zip redmine_kroki/test
+          zip -d redmine_kroki.zip redmine_kroki/test -r
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
