@@ -32,7 +32,7 @@ a look at the other compose files in the source code to get you started.
 Other options include Podman, Kubernetes, bare metal or external provider. Read
 [Kroki documentation](https://docs.kroki.io/kroki/setup/install/) for more
 information on how to setup the service. It doesn't really matter how you do it,
-just make sure the Kroki server is reacheable from your Redmine instance.
+just make sure the Kroki server is reachable from your Redmine instance.
 
 ## Installation
 
@@ -126,7 +126,7 @@ If you run into other problems, please feel free to [open an issue](//github.com
 
 ### Quickstart
 
-**Prequisite**: Docker and Docker Compose installed
+**Prerequisite**: Docker and Docker Compose installed
 
 1. Clone this repository
 2. Run `docker-compose up`
