@@ -123,4 +123,33 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     }')
     assert_match(/<svg/, diagram)
   end
+
+  test 'add_diagram_options appends single headers to request' do
+    req = Net::HTTP::Get.new('http://test.test')
+    add_diagram_options(req, { key: 'value' })
+    assert_equal('value', req['Kroki-Diagram-Options-Key'])
+  end
+
+  test 'add_diagram_options with multiple headers appends them all to request' do
+    req = Net::HTTP::Get.new('http://test.test')
+    add_diagram_options(req, { key1: 'value1', key2: 'value2' })
+    assert_equal('value1', req['Kroki-Diagram-Options-Key1'])
+    assert_equal('value2', req['Kroki-Diagram-Options-Key2'])
+  end
+
+  test 'parse_macro_options returns correct values' do
+    options = ['key1=value1', 'key2=value2']
+
+    result = parse_macro_options(options)
+
+    assert_equal({ key1: 'value1', key2: 'value2' }, result)
+  end
+
+  test 'parse_macro_options returns nil if no options' do
+    options = []
+
+    result = parse_macro_options(options)
+
+    assert_nil(result)
+  end
 end

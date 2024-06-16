@@ -9,10 +9,11 @@ wiki pages.
 
 * 📊 Renders 30+ diagram types including Mermaid, PlantUML, BPMN, Excalidraw and
   Draw.io/Diagrams.net (experimental).
+* 🎨 Customize the look and feel with diagram options.
 * 🚀 Offloads the rendering of diagrams to external servers. No dependencies
 to download.
 * 📥 Embeds SVG markup in the page, so it's versioned at every save and
-  there are files to deal with!
+  there are no files to deal with!
 
 ## Prerequisites
 
@@ -58,11 +59,19 @@ number (typically 8000).
 
 ## Usage
 
-Input a diagram in a kroki macro and pass the diagram type as an argument.
+Input a diagram in a kroki macro and pass the diagram type as the first argument.
 
 * Choose from this list of [supported diagram types](https://kroki.io/#support)
   \+ `diagramsnet`
 * Enter the diagram type as alpha-numeric characters
+
+Optionally, you can add [diagram options](https://docs.kroki.io/kroki/setup/diagram-options/)
+to change how the diagram is displayed.
+
+* Enter the options in the format `key=value`
+* If a key or a value has more than one word, replace the spaces by a dash and
+keep it lowercase (_kebab-case_)
+* You can add as many as you want
 
 ✅ Correct
 
@@ -78,12 +87,36 @@ Input a diagram in a kroki macro and pass the diagram type as an argument.
 {{kroki(vegalite)
 ...
 }}
+
+{{kroki(mermaid, theme=dark)
+...
+}}
+
+{{kroki(mermaid, theme=dark, font-family=serif)
+...
+}}
 ```
 
 ❌ Incorrect
 
 ```markdown
 {{kroki
+...
+}}
+
+{{kroki(mermaid, theme:dark)
+...
+}}
+
+{{kroki(theme=dark)
+...
+}}
+
+{{kroki(mermaid theme=dark font-family=serif)
+...
+}}
+
+{{kroki(mermaid, fontFamily=serif)
 ...
 }}
 ```
