@@ -13,13 +13,18 @@ Redmine::Plugin.register :redmine_kroki do
 
   Redmine::WikiFormatting::Macros.register do
     desc "Renders a diagram from textual description with Kroki.\n" +
-         "Provide the diagram type as the first argument.\nExample:\n\n" +
-         "{{kroki(mermaid)\nflowchart LR\n  Hello --> World\n}}"
+         "Provide the diagram type as the first argument and the options after.\n" +
+         "Examples:\n\n" +
+         "{{kroki(mermaid)\nflowchart LR\n  Hello --> World\n}}\n\n" +
+         "{{kroki(mermaid, theme=dark)\nflowchart LR\n  Hello --> World\n}}"
     macro :kroki do |_obj, args, text|
       extend RedmineKrokiHelper
+      puts 'ARGS'
+      puts args
       kroki_url = Setting.plugin_redmine_kroki['kroki_url']
-      diagram_type = args.first
-      res = convert_diagram(kroki_url, diagram_type, text)
+      diagram_type = args.shift
+      diagram_options = parse_macro_options(args)
+      res = convert_diagram(kroki_url, diagram_type, text, diagram_options)
 
       res.html_safe
     end
