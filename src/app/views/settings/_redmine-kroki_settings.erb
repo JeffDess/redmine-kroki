@@ -9,7 +9,23 @@
   <legend class="kroki-legend">Kroki Server</legend>
   <span class="kroki-textfield">
     <%= label_tag :settings_kroki_url, "URL:" %>
-    <%= text_field_tag "settings[kroki_url]",
-    @settings["kroki_url"] %>
+    <%= text_field_tag "settings[kroki_url]", @settings["kroki_url"] %>
   </span>
+</fieldset>
+<fieldset class="kroki-fieldset">
+  <legend class="kroki-legend">Display</legend>
+  <span class"kroki-checkbox">
+    <%= label_tag :settings_force_dark, "Force dark mode on all themes:" %>
+    <%= check_box_tag "settings[force_dark]", 1, @settings["force_dark"] %>
+  </span>
+  <span class="kroki-textfield">
+    <%= label_tag :settings_dark_themes, "Dark themes names:" %>
+    <%= text_field_tag "settings[dark_themes]", @settings["dark_themes"] %>
+  </span>
+  <p>
+    <small>
+      Enter a space separated list of theme names requiring light text on dark
+      background
+    </small>
+  </p>
 </fieldset>
