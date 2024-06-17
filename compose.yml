@@ -9,8 +9,11 @@ services:
     environment:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: pass
+      REDMINE_PLUGINS_MIGRATE: true
     volumes:
       - ./src:/usr/src/redmine/plugins/redmine_kroki
+      - ./lib/redmine_theme_changer:/usr/src/redmine/plugins/redmine_theme_changer
+      - ./lib/redmine_theme_dark:/usr/src/redmine/public/themes/redmine_theme_dark
     depends_on:
       db:
         condition: service_healthy

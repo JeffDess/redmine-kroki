@@ -5,6 +5,9 @@ yaml-files:
   - '*.yml'
   - '.yamllint'
 
+ignore:
+  - 'lib/*'
+
 rules:
   document-start: disable
   empty-lines:

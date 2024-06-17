@@ -4,3 +4,7 @@
   max-height: 100%;
   overflow: auto;
 }
+
+.kroki.dark svg {
+  filter: invert(1) hue-rotate(180deg);
+}

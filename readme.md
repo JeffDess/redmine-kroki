@@ -10,6 +10,7 @@ wiki pages.
 * 📊 Renders 30+ diagram types including Mermaid, PlantUML, BPMN, Excalidraw and
   Draw.io/Diagrams.net (experimental).
 * 🎨 Customize the look and feel with diagram options.
+* 🌘 Auto dark mode on diagrams, everything stays readable.
 * 🚀 Offloads the rendering of diagrams to external servers. No dependencies
 to download.
 * 📥 Embeds SVG markup in the page, so it's versioned at every save and
@@ -44,6 +45,8 @@ just make sure the Kroki server is reachable from your Redmine instance.
 
 ## Configuration
 
+### Kroki server
+
 If you have the suggested setup, then the default configuration should be
 working for you.
 
@@ -56,6 +59,41 @@ number (typically 8000).
 * Docker Compose: `http://kroki:8000`
 * Local Kroki server: `http://127.0.0.1:8000`
 * External provider: `https://example.com:8000`
+
+### Display
+
+You can modify two display settings, both related to dark themes. You can ignore
+this section if you aren't using any.
+
+* **Force dark mode**: Invert light and dark colors on all themes. If you have
+  a dark theme enforced for everybody on the server, you might want to check
+  this box. Default: `false`
+* **Dark themes names:** This will apply dark mode only when the theme
+  selected by the current user matches one value of the list. This option was made
+  with [Redmine Theme Changer](https://github.com/haru/redmine_theme_changer) in
+  mind. Enter theme names separated by a single spaces (same as in the path
+  `redmine/public/themes/...`). Default: `dark-theme
+redmine-theme-dark`
+
+<details>
+  <summary>Visual Example</summary>
+  For instance, let's consider this diagram on a light theme:
+
+  ![Mermaid diagram on light background](doc/img/config_light-light.png)
+
+  If you were to apply a dark theme on this page, the lines and text on the
+  background would become quite unreadable:
+
+  ![Unreadble Mermaid diagram on dark background](doc/img/config_dark-light.png)
+
+  Let's fix it by adding the theme name in the configuration. If we reload the
+  page, we'll get:
+
+  ![Mermaid diagram on dark background](doc/img/config_dark-dark.png)
+
+  Ah, much better! The dark mode changed the colors a bit, but every element
+  has adequate contrast.
+</details>
 
 ## Usage
 
@@ -165,3 +203,12 @@ If you run into other problems, please feel free to [open an issue](//github.com
 * These containers will keep running after the test has completed, so invoke
   the command again to rerun it quickly.
 * When you are done, run `scripts/test.sh --down` to kill the containers.
+
+## References
+
+* [Kroki.io](https://kroki.io/): Creates diagrams from textual descriptions!
+* [Redmine Theme Changer](https://github.com/haru/redmine_theme_changer):
+A plugin which lets each user select theme from their account page.
+* [BS Redmine theme Dark](https://github.com/martin-svoboda/bs-redmine-theme-dark):
+Modern dark theme for Redmine based on material design. This theme was used to
+demonstrate dark theme settings.

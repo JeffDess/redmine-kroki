@@ -42,3 +42,14 @@ def parse_macro_options(options)
 
   options.map { |option| option.split('=') }.to_h.transform_keys(&:to_sym)
 end
+
+def wrap_diagram(diagram, classes)
+  href = '/plugin_assets/redmine_kroki/stylesheets/redmine-kroki.css'
+  style_tag = "<link rel='stylesheet' type='text/css' href='#{href}' />"
+
+  "#{style_tag}<div class=\"#{classes}\">#{diagram}</div>"
+end
+
+def css_class(is_dark_forced, dark_themes, user_theme)
+  is_dark_forced || dark_themes.include?(user_theme) ? 'kroki dark' : 'kroki'
+end

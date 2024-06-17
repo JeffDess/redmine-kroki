@@ -33,10 +33,15 @@
 
 .kroki-textfield label {
   margin-right: 1em !important;
+  white-space: nowrap;
 }
 
 .tabular label {
   text-align: left;
+}
+
+.tabular.settings p {
+  padding-left: 13em;
 }
 
 .tabular.settings label {
