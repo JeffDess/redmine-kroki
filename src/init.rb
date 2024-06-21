@@ -30,7 +30,7 @@ Redmine::Plugin.register :redmine_kroki do
       css = css_class(
         Setting.plugin_redmine_kroki[:force_dark],
         Setting.plugin_redmine_kroki[:dark_themes],
-        User.current.preference.theme
+        get_user_theme(User.current)
       )
       res = wrap_diagram(diagram, css)
 

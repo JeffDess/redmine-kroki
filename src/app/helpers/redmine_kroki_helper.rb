@@ -51,5 +51,9 @@ def wrap_diagram(diagram, classes)
 end
 
 def css_class(is_dark_forced, dark_themes, user_theme)
-  is_dark_forced || dark_themes.include?(user_theme) ? 'kroki dark' : 'kroki'
+  is_dark_forced || user_theme && dark_themes.include?(user_theme) ? 'kroki dark' : 'kroki'
+end
+
+def get_user_theme(user)
+  user.preference.respond_to?('theme') ? user.preference.theme : nil
 end
