@@ -13,8 +13,10 @@ wiki pages.
 * 🌘 Auto dark mode on diagrams, everything stays readable.
 * 🚀 Offloads the rendering of diagrams to external servers. No dependencies
 to download.
+* 🙈 Kroki URL is not disclosed in the frontend, so public instances can
+keep their server secret.
 * 📥 Embeds SVG markup in the page, so it's versioned at every save and
-  there are no files to deal with!
+there are no files to deal with!
 
 ## Prerequisites
 
