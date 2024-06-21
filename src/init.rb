@@ -9,9 +9,9 @@ Redmine::Plugin.register :redmine_kroki do
   author_url 'https://github.com/jeffdess'
 
   settings default: {
-             kroki_url: 'http://kroki:8000',
-             dark_themes: %w[dark dark-theme redmine-dark],
-             force_dark: false
+             'kroki_url' => 'http://kroki:8000',
+             'dark_themes' => %w[dark dark-theme redmine-dark],
+             'force_dark' => false
            },
            partial: 'settings/redmine-kroki_settings'
 
