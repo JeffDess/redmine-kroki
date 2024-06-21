@@ -34,7 +34,7 @@ Redmine::Plugin.register :redmine_kroki do
       )
       res = wrap_diagram(diagram, css)
 
-      res.html_safe
+      res.html_safe.force_encoding('UTF-8')
     end
   end
 end
