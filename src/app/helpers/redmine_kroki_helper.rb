@@ -24,7 +24,7 @@ module RedmineKrokiHelper
     req = Net::HTTP::Post.new(url.path)
 
     req.content_type = 'text/plain'
-    req.body = diagram_content
+    req.body = diagram_content.tr("\r", "\n") unless diagram_content.nil?
     add_diagram_options(req, diagram_options) unless diagram_options.nil?
 
     http.request(req)

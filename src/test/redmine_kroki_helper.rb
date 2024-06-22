@@ -124,6 +124,25 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram renders nomnoml' do
+    diagram = convert_diagram(url, 'nomnoml', '
+      [Pirate|eyeCount: Int|raid();pillage()|
+        [beard]--[parrot]
+        [beard]-:>[foul mouth]
+      ]
+
+      [<abstract>Marauder]<:--[Pirate]
+      [Pirate]- 0..7[mischief]
+      [jollyness]->[Pirate]
+      [jollyness]->[rum]
+      [jollyness]->[singing]
+      [Pirate]-> *[rum|tastiness: Int|swig()]
+      [Pirate]->[singing]
+      [singing]<->[rum]
+    ')
+    assert_match(/<svg/, diagram)
+  end
+
   test 'add_diagram_options appends single headers to request' do
     req = Net::HTTP::Get.new('http://test.test')
     add_diagram_options(req, { key: 'value' })
