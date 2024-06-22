@@ -24,11 +24,18 @@ module RedmineKrokiHelper
     req = Net::HTTP::Post.new(url.path)
 
     req.content_type = 'text/plain'
-    req.body = diagram_content.tr("\r", "\n") unless diagram_content.nil?
+    req.body = sanitize_diagram(diagram_type, diagram_content)
     add_diagram_options(req, diagram_options) unless diagram_options.nil?
 
     http.request(req)
   end
+end
+
+def sanitize_diagram(diagram_type, diagram_content)
+  return diagram_content.tr("\r", "\n") \
+    if diagram_type == 'nomnoml' && !diagram_content.nil?
+
+  diagram_content
 end
 
 def add_diagram_options(request, options)
