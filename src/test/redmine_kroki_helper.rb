@@ -242,19 +242,19 @@ class RedmineKrokiHelperTest < ActionView::TestCase
   end
 
   test 'convert_options_to_style returns correct max-height' do
-    result = convert_options_to_style({ max_height: '1px' })
+    result = convert_options_to_style({ max_height: '1' })
 
     assert_equal('height: 1px;', result)
   end
 
   test 'convert_options_to_style returns correct max-width' do
-    result = convert_options_to_style({ max_width: '1px' })
+    result = convert_options_to_style({ max_width: '1' })
 
     assert_equal('max-width: 1px;', result)
   end
 
   test 'convert_options_to_style returns correct both max-height & max-width' do
-    result = convert_options_to_style({ max_height: '1px', max_width: '2px' })
+    result = convert_options_to_style({ max_height: '1', max_width: '2' })
 
     assert_equal('height: 1px; max-width: 2px;', result)
   end
@@ -271,24 +271,27 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_equal('', result)
   end
 
-  test 'css_value? with % returns true' do
-    assert_equal(true, css_value?('1%'))
+  test 'only_digits? with one digit returns true' do
+    assert_equal(true, only_digits?('1'))
   end
 
-  test 'css_value? with px returns true' do
-    assert_equal(true, css_value?('1px'))
+  test 'only_digits? with multi-digits returns true' do
+    assert_equal(true, only_digits?('123456'))
   end
 
-  test 'css_value? with multi-digit % returns true' do
-    assert_equal(true, css_value?('123456%'))
+  test 'only_digits? with % returns false' do
+    assert_equal(false, only_digits?('1%'))
   end
 
-  test 'css_value? with multi-digit px returns true' do
-    assert_equal(true, css_value?('123456px'))
+  test 'only_digits? with px returns false' do
+    assert_equal(false, only_digits?('1px'))
   end
 
-  test 'css_value? with both px and % returns false' do
-    assert_equal(false, css_value?('1%px'))
-    assert_equal(false, css_value?('1px%'))
+  test 'only_digits? with multi-digit % returns false' do
+    assert_equal(false, only_digits?('123456%'))
+  end
+
+  test 'only_digits? with multi-digit px returns false' do
+    assert_equal(false, only_digits?('123456px'))
   end
 end

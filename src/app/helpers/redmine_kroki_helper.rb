@@ -62,24 +62,22 @@ def wrap_diagram(diagram, classes, options)
   "#{style_tag}<div class=\"#{classes}\" style=\"#{styles}\">#{diagram}</div>"
 end
 
-def css_value?(value)
-  css_units = %i[px %].freeze
-  regex = /\A\d+(#{css_units.join('|')})\z/
-  !!(value =~ regex)
+def only_digits?(value)
+  !!value.match?(/\A\d+\z/)
 end
 
 def convert_options_to_style(options)
   return '' if options.nil?
 
   plugin_options = options.select do |k, v|
-    PLUGIN_OPTIONS.include?(k) && css_value?(v)
+    PLUGIN_OPTIONS.include?(k) && only_digits?(v)
   end
 
   return '' if plugin_options.empty?
 
   style = ''.dup
   plugin_options.reduce(style) do |acc, (k, v)|
-    acc << "#{plugin_option_css_rule(k)}: #{v}; "
+    acc << "#{plugin_option_css_rule(k)}: #{v}px; "
   end
 
   style.strip
