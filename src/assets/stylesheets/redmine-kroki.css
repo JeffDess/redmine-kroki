@@ -11,6 +11,10 @@
   height: 100%;
 }
 
+.kroki svg .label {
+  font-size: 15px;
+}
+
 .kroki.dark svg {
   filter: invert(1) hue-rotate(180deg);
 }
