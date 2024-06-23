@@ -100,9 +100,13 @@ this section if you aren't using any.
 
 Input a diagram in a kroki macro and pass the diagram type as the first argument.
 
+### Diagram Type
+
 * Choose from this list of [supported diagram types](https://kroki.io/#support)
   \+ `diagramsnet`
 * Enter the diagram type as alpha-numeric characters
+
+### Diagram Options
 
 Optionally, you can add [diagram options](https://docs.kroki.io/kroki/setup/diagram-options/)
 to change how the diagram is displayed.
@@ -111,6 +115,16 @@ to change how the diagram is displayed.
 * If a key or a value has more than one word, replace the spaces by a dash and
 keep it lowercase (_kebab-case_)
 * You can add as many as you want
+
+### Diagram Size
+
+In some situations, diagrams may be too large. You can limit their size with
+these options:
+
+* `max_width`: Integer in pixels. The diagram will fill available space
+unless the screen is narrower than the provided value.
+* `max_height`: Integer in pixels. The diagram will fill the space up
+to that limit or until it reaches 100% width.
 
 ✅ Correct
 
@@ -132,6 +146,18 @@ keep it lowercase (_kebab-case_)
 }}
 
 {{kroki(mermaid, theme=dark, font-family=serif)
+...
+}}
+
+{{kroki(mermaid, max_width=500)
+...
+}}
+
+{{kroki(mermaid, max_height=500)
+...
+}}
+
+{{kroki(mermaid, theme=dark, max_width=500)
 ...
 }}
 ```
@@ -156,6 +182,18 @@ keep it lowercase (_kebab-case_)
 }}
 
 {{kroki(mermaid, fontFamily=serif)
+...
+}}
+
+{{kroki(mermaid, max-width=500px)
+...
+}}
+
+{{kroki(mermaid, max-width=500%)
+...
+}}
+
+{{kroki(mermaid, max-width=0)
 ...
 }}
 ```
