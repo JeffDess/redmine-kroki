@@ -1,8 +1,14 @@
 .kroki {
   display: block;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: auto;
+  overflow: visible;
+}
+
+.kroki svg {
+  width: 100%;
+}
+
+.kroki.resized svg {
+  height: 100%;
 }
 
 .kroki.dark svg {

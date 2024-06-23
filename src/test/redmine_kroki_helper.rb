@@ -240,4 +240,55 @@ class RedmineKrokiHelperTest < ActionView::TestCase
 
     assert_nil(result)
   end
+
+  test 'convert_options_to_style returns correct max-height' do
+    result = convert_options_to_style({ max_height: '1px' })
+
+    assert_equal('height: 1px;', result)
+  end
+
+  test 'convert_options_to_style returns correct max-width' do
+    result = convert_options_to_style({ max_width: '1px' })
+
+    assert_equal('max-width: 1px;', result)
+  end
+
+  test 'convert_options_to_style returns correct both max-height & max-width' do
+    result = convert_options_to_style({ max_height: '1px', max_width: '2px' })
+
+    assert_equal('height: 1px; max-width: 2px;', result)
+  end
+
+  test 'convert_options_to_style with no options returns empty string' do
+    result = convert_options_to_style(nil)
+
+    assert_equal('', result)
+  end
+
+  test 'convert_options_to_style with diagram option returns empty string' do
+    result = convert_options_to_style({ key1: 'value1' })
+
+    assert_equal('', result)
+  end
+
+  test 'css_value? with % returns true' do
+    assert_equal(true, css_value?('1%'))
+  end
+
+  test 'css_value? with px returns true' do
+    assert_equal(true, css_value?('1px'))
+  end
+
+  test 'css_value? with multi-digit % returns true' do
+    assert_equal(true, css_value?('123456%'))
+  end
+
+  test 'css_value? with multi-digit px returns true' do
+    assert_equal(true, css_value?('123456px'))
+  end
+
+  test 'css_value? with both px and % returns false' do
+    assert_equal(false, css_value?('1%px'))
+    assert_equal(false, css_value?('1px%'))
+  end
 end

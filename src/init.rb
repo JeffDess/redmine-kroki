@@ -32,7 +32,7 @@ Redmine::Plugin.register :redmine_kroki do
         Setting.plugin_redmine_kroki[:dark_themes],
         get_user_theme(User.current)
       )
-      res = wrap_diagram(diagram, css)
+      res = wrap_diagram(diagram, css, diagram_options)
 
       res.html_safe.force_encoding('UTF-8')
     end
