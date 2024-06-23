@@ -15,6 +15,10 @@
   font-size: 15px;
 }
 
+.kroki svg text {
+  font-size: revert-layer;
+}
+
 .kroki.dark svg {
   filter: invert(1) hue-rotate(180deg);
 }
