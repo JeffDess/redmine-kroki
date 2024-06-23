@@ -218,6 +218,13 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_equal('value2', req['Kroki-Diagram-Options-Key2'])
   end
 
+  test 'add_diagram_options with plugin options does not append to request' do
+    req = Net::HTTP::Get.new('http://test.test')
+    add_diagram_options(req, { max_height: '1px', max_width: '1px' })
+    assert_nil(req['Kroki-Diagram-Options-Max_height'])
+    assert_nil(req['Kroki-Diagram-Options-Max_width'])
+  end
+
   test 'parse_macro_options returns correct values' do
     options = ['key1=value1', 'key2=value2']
 
