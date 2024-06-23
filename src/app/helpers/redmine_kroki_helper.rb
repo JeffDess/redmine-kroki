@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+PLUGIN_OPTIONS = %i[max_width max_height].freeze
+
 # Utility functions for the Redmine-Kroki plugin
 module RedmineKrokiHelper
   require 'net/http'
@@ -40,7 +42,8 @@ end
 
 def add_diagram_options(request, options)
   options.each do |k, v|
-    request.add_field("Kroki-Diagram-Options-#{k.to_s.downcase.capitalize}", v)
+    request.add_field("Kroki-Diagram-Options-#{k.to_s.downcase.capitalize}", v) \
+      unless PLUGIN_OPTIONS.include?(k)
   end
 end
 
