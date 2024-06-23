@@ -71,11 +71,10 @@ this section if you aren't using any.
   a dark theme enforced for everybody on the server, you might want to check
   this box. Default: `false`
 * **Dark themes names:** This will apply dark mode only when the theme
-  selected by the current user matches one value of the list. This option was made
-  with [Redmine Theme Changer](https://github.com/haru/redmine_theme_changer) in
-  mind. Enter theme names separated by a single spaces (same as in the path
-  `redmine/public/themes/...`). Default: `dark-theme
-redmine-theme-dark`
+  selected by the current user matches one value of the list. This option was
+  made with [Redmine Theme Changer](https://github.com/haru/redmine_theme_changer)
+  in mind. Enter theme names separated by a single spaces (same as in the path
+  `redmine/public/themes/...`). Default: `dark-theme redmine-theme-dark`
 
 <details>
   <summary>Visual Example</summary>
