@@ -19,6 +19,10 @@
   font-size: revert-layer;
 }
 
+.kroki svg[xmlns\:inkspace] text {
+  transform: translateY(-3px);
+}
+
 .kroki.dark svg {
   filter: invert(1) hue-rotate(180deg);
 }
