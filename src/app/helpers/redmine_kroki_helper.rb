@@ -53,11 +53,40 @@ def parse_macro_options(options)
   options.map { |option| option.split('=') }.to_h.transform_keys(&:to_sym)
 end
 
-def wrap_diagram(diagram, classes)
+def wrap_diagram(diagram, classes, options)
   href = '/plugin_assets/redmine_kroki/stylesheets/redmine-kroki.css'
   style_tag = "<link rel='stylesheet' type='text/css' href='#{href}' />"
+  styles = convert_options_to_style(options)
+  classes = classes.dup << ' resized' unless styles.empty?
 
-  "#{style_tag}<div class=\"#{classes}\">#{diagram}</div>"
+  "#{style_tag}<div class=\"#{classes}\" style=\"#{styles}\">#{diagram}</div>"
+end
+
+def css_value?(value)
+  css_units = %i[px %].freeze
+  regex = /\A\d+(#{css_units.join('|')})\z/
+  !!(value =~ regex)
+end
+
+def convert_options_to_style(options)
+  return '' if options.nil?
+
+  plugin_options = options.select do |k, v|
+    PLUGIN_OPTIONS.include?(k) && css_value?(v)
+  end
+
+  return '' if plugin_options.empty?
+
+  style = ''.dup
+  plugin_options.reduce(style) do |acc, (k, v)|
+    acc << "#{plugin_option_css_rule(k)}: #{v}; "
+  end
+
+  style.strip
+end
+
+def plugin_option_css_rule(key)
+  key == :max_width ? key.to_s.gsub('_', '-') : key.to_s.split('_').last
 end
 
 def css_class(is_dark_forced, dark_themes, user_theme)
