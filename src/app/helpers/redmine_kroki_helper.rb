@@ -54,7 +54,8 @@ def parse_macro_options(options)
 end
 
 def wrap_diagram(diagram, classes, options)
-  href = '/plugin_assets/redmine_kroki/stylesheets/redmine-kroki.css'
+  version = Redmine::Plugin.registered_plugins[:redmine_kroki].version
+  href = "/plugin_assets/redmine_kroki/stylesheets/redmine-kroki.css?v=#{version}"
   style_tag = "<link rel='stylesheet' type='text/css' href='#{href}' />"
   styles = convert_options_to_style(options)
   classes = classes.dup << ' resized' unless styles.empty?
