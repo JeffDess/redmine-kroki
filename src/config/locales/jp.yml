@@ -1,0 +1,14 @@
+ja:
+  settings:
+    instructions: |
+      デフォルトのインストールを使用していない場合は、以下に Kroki サーバーの
+      URL を設定してください。
+    server:
+      title: 'Kroki サーバー'
+      url: 'URL:'
+    display:
+      title: '表示'
+      force_dark_mode: 'すべてのテーマでダークモードを強制する：'
+      dark_theme_names: 'ダークテーマ名：'
+      dark_theme_names_note: |
+        明るいテキストが必要なテーマ名のスペースで区切られたリストを入力してください。

@@ -1,0 +1,15 @@
+ca:
+  settings:
+    instructions: |
+      Configura la URL del teu servidor Kroki a continuació si no estàs
+      utilitzant la instal·lació predeterminada.
+    server:
+      title: 'Servidor Kroki'
+      url: 'URL:'
+    display:
+      title: 'Visualització'
+      force_dark_mode: 'Força el mode fosc en tots els temes:'
+      dark_theme_names: 'Noms dels temes foscos:'
+      dark_theme_names_note: |
+        Introdueix una llista separada per espais dels noms dels temes que
+        requereixen text clar en un fons fosc.

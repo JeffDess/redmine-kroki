@@ -1,0 +1,15 @@
+en:
+  settings:
+    instructions: |
+      Configure your Kroki server URL below if you are not using the default
+      installation.
+    server:
+      title: 'Kroki Server'
+      url: 'URL:'
+    display:
+      title: 'Display'
+      force_dark_mode: 'Force dark mode on all themes:'
+      dark_theme_names: 'Dark theme names:'
+      dark_theme_names_note: |
+        Enter a space separated list of theme names requiring light text on
+        dark background.

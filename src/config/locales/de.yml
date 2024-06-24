@@ -1,0 +1,15 @@
+de:
+  settings:
+    instructions: |
+      Konfigurieren Sie unten Ihre Kroki-Server-URL, wenn Sie nicht die
+      Standardinstallation verwenden.
+    server:
+      title: 'Kroki Server'
+      url: 'URL:'
+    display:
+      title: 'Anzeige'
+      force_dark_mode: 'Erzwinge den Dunkelmodus für alle Themen:'
+      dark_theme_names: 'Dunkle Themennamen:'
+      dark_theme_names_note: |
+        Geben Sie eine durch Leerzeichen getrennte Liste von Themennamen ein,
+        die hellen Text auf dunklem Hintergrund erfordern.

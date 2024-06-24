@@ -1,31 +1,29 @@
 <%= stylesheet_link_tag "settings", plugin: "redmine_kroki" %>
 <div class="kroki-desc">
   <p>
-    Configure your Kroki server URL below if you are not using the default
-    installation.
+    <%= l('settings.instructions') %>
   </p>
 </div>
 <fieldset class="kroki-fieldset">
-  <legend class="kroki-legend">Kroki Server</legend>
+  <legend class="kroki-legend"><%= l('settings.server.title') %></legend>
   <span class="kroki-textfield">
-    <%= label_tag :settings_kroki_url, "URL:" %>
+    <%= label_tag :settings_kroki_url, l('settings.server.url') %>
     <%= text_field_tag "settings[kroki_url]", @settings["kroki_url"] %>
   </span>
 </fieldset>
 <fieldset class="kroki-fieldset">
-  <legend class="kroki-legend">Display</legend>
+  <legend class="kroki-legend"><%= l('settings.display.title') %></legend>
   <span class"kroki-checkbox">
-    <%= label_tag :settings_force_dark, "Force dark mode on all themes:" %>
+    <%= label_tag :settings_force_dark, l('settings.display.force_dark_mode') %>
     <%= check_box_tag "settings[force_dark]", 1, @settings["force_dark"] %>
   </span>
   <span class="kroki-textfield">
-    <%= label_tag :settings_dark_themes, "Dark themes names:" %>
+    <%= label_tag :settings_dark_themes, l('settings.display.dark_theme_names') %>
     <%= text_field_tag "settings[dark_themes]", @settings["dark_themes"] %>
   </span>
   <p>
     <small>
-      Enter a space separated list of theme names requiring light text on dark
-      background
+      <%= l('settings.display.dark_theme_names_note') %>
     </small>
   </p>
 </fieldset>

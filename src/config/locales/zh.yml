@@ -1,0 +1,13 @@
+zh:
+  settings:
+    instructions: |
+      如果您未使用默认安装，请在下面配置您的 Kroki 服务器 URL。
+    server:
+      title: 'Kroki 服务器'
+      url: 'URL:'
+    display:
+      title: '显示'
+      force_dark_mode: '在所有主题上强制启用深色模式：'
+      dark_theme_names: '深色主题名称：'
+      dark_theme_names_note: |
+        输入一个用空格分隔的主题名称列表，要求在深色背景上使用浅色文本。

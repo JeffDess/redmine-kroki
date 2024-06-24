@@ -1,0 +1,15 @@
+hi:
+  settings:
+    instructions: |
+      डिफ़ॉल्ट स्थापना का उपयोग न कर रहे हों तो नीचे अपने Kroki सर्वर URL
+      को कॉन्फ़िगर करें।
+    server:
+      title: 'Kroki सर्वर'
+      url: 'URL:'
+    display:
+      title: 'प्रदर्शन'
+      force_dark_mode: 'सभी थीमों पर डार्क मोड को बल प्रदान करें:'
+      dark_theme_names: 'डार्क थीम नाम:'
+      dark_theme_names_note: |
+        एक स्थान से अलग थीम नामों की सूची दर्ज करें जिनमें हल्का
+        पाठ डार्क पृष्ठभूमि पर आवश्यक हो।

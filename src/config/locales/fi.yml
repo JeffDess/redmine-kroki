@@ -1,0 +1,14 @@
+fi:
+  settings:
+    instructions: |
+      Konfiguroi Kroki-palvelimen URL alla, jos et käytä oletusasennusta.
+    server:
+      title: 'Kroki-palvelin'
+      url: 'URL:'
+    display:
+      title: 'Näyttö'
+      force_dark_mode: 'Pakota tumma tila kaikille teemoille:'
+      dark_theme_names: 'Tummat teemanimet:'
+      dark_theme_names_note: |
+        Syötä välilyönnein erotettu luettelo teemanimistä, jotka vaativat
+        vaalean tekstin tummalla taustalla.

@@ -1,0 +1,15 @@
+fr:
+  settings:
+    instructions: |
+      Configurez l'URL de votre serveur Kroki ci-dessous si vous n'avez pas la
+      l'installation suggérée.
+    server:
+      title: 'Serveur Kroki'
+      url: 'URL :'
+    display:
+      title: 'Affichage'
+      force_dark_mode: 'Forcer le mode sombre pour tous les thèmes :'
+      dark_theme_names: 'Noms des thèmes sombres :'
+      dark_theme_names_note: |
+        Entrez une liste des noms de thèmes nécessitant un texte clair sur fond
+        sombre, séparés par des espaces.

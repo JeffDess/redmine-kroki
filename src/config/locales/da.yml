@@ -1,0 +1,15 @@
+da:
+  settings:
+    instructions: |
+      Konfigurer din Kroki-server-URL nedenfor, hvis du ikke bruger den
+      foruddefinerede installation.
+    server:
+      title: 'Kroki Server'
+      url: 'URL:'
+    display:
+      title: 'Visning'
+      force_dark_mode: 'Tving mørk tilstand på alle temaer:'
+      dark_theme_names: 'Mørke tema navne:'
+      dark_theme_names_note: |
+        Indtast en mellemrum adskilt liste af temanavne, der kræver lys tekst på
+        mørk baggrund.
