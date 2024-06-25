@@ -23,6 +23,12 @@
   transform: translateY(-3px);
 }
 
+/* NOTE: White dropshadows are weird */
+.kroki.dark svg path[filter*="url(#shadowBlur)"],
+.kroki.dark svg rect[style*="filter:url(#filter_blur)"] {
+  display: none;
+}
+
 .kroki.dark svg {
   filter: invert(1) hue-rotate(180deg);
 }
