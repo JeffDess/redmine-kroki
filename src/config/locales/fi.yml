@@ -1,4 +1,9 @@
 fi:
+  errors:
+    missing_diagram_type: Puuttuva kaaviotyyppi
+    missing_kroki_url: Puuttuva Kroki-URL
+    unknown_diagram_type: Tuntematon kaaviotyyppi
+    syntax_error: 'Syntaksivirhe: '
   settings:
     instructions: |
       Konfiguroi Kroki-palvelimen URL alla, jos et käytä oletusasennusta.

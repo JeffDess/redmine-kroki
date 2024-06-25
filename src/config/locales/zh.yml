@@ -1,4 +1,9 @@
 zh:
+  errors:
+    missing_diagram_type: 缺少图表类型
+    missing_kroki_url: 缺少Kroki URL
+    unknown_diagram_type: 未知图表类型
+    syntax_error: '语法错误: '
   settings:
     instructions: |
       如果您未使用默认安装，请在下面配置您的 Kroki 服务器 URL。
