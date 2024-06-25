@@ -1,4 +1,9 @@
 fr:
+  errors:
+    missing_diagram_type: Type de diagramme manquant
+    missing_kroki_url: URL du serveur Kroki manquante
+    unknown_diagram_type: Type de diagramme inconnu
+    syntax_error: 'Erreur de syntaxe : '
   settings:
     instructions: |
       Configurez l'URL de votre serveur Kroki ci-dessous si vous n'avez pas la

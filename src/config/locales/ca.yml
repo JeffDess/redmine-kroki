@@ -1,4 +1,9 @@
 ca:
+  errors:
+    missing_diagram_type: Tipus de diagrama mancant
+    missing_kroki_url: URL de Kroki mancante
+    unknown_diagram_type: Tipus de diagrama desconegut
+    syntax_error: 'Error de sintaxi: '
   settings:
     instructions: |
       Configura la URL del teu servidor Kroki a continuació si no estàs

@@ -1,4 +1,9 @@
 da:
+  errors:
+    missing_diagram_type: Manglende diagramtype
+    missing_kroki_url: Manglende Kroki URL
+    unknown_diagram_type: Ukendt diagramtype
+    syntax_error: 'Syntaksfejl: '
   settings:
     instructions: |
       Konfigurer din Kroki-server-URL nedenfor, hvis du ikke bruger den

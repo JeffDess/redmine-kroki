@@ -1,4 +1,9 @@
 ja:
+  errors:
+    missing_diagram_type: 不足している図表タイプ
+    missing_kroki_url: 不足しているKroki URL
+    unknown_diagram_type: 不明な図表タイプ
+    syntax_error: '構文エラー: '
   settings:
     instructions: |
       デフォルトのインストールを使用していない場合は、以下に Kroki サーバーの

@@ -8,13 +8,13 @@ module RedmineKrokiHelper
   require 'uri'
 
   def convert_diagram(kroki_url, diagram_type, diagram_content, diagram_options = nil)
-    raise 'Missing diagram type' if diagram_type.nil? || diagram_type.empty?
-    raise 'Missing Kroki URL' if kroki_url.nil? || kroki_url.empty?
+    raise l('errors.missing_diagram_type') if diagram_type.nil? || diagram_type.empty?
+    raise l('errors.missing_kroki_url') if kroki_url.nil? || kroki_url.empty?
 
     res = send_kroki_request(kroki_url, diagram_type, diagram_content, diagram_options)
 
-    raise "Cannot find the diagram \"#{diagram_type}\"" if res.code == '404'
-    raise res.body if res.code == '400'
+    raise "#{l('errors.unknown_diagram_type')} \"#{diagram_type}\"" if res.code == '404'
+    raise "#{l('errors.syntax_error')}#{res.body}" if res.code == '400'
 
     res.body
   end

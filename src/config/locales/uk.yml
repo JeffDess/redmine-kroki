@@ -1,4 +1,9 @@
 uk:
+  errors:
+    missing_diagram_type: Відсутній тип діаграми
+    missing_kroki_url: Відсутня URL Kroki
+    unknown_diagram_type: Невідомий тип діаграми
+    syntax_error: 'Синтаксична помилка: '
   settings:
     instructions: |
       Налаштуйте URL сервера Kroki нижче, якщо ви не використовуєте

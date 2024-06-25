@@ -1,4 +1,9 @@
 hi:
+  errors:
+    missing_diagram_type: गायब डायग्राम प्रकार
+    missing_kroki_url: गायब क्रोकी यूआरएल
+    unknown_diagram_type: अज्ञात डायग्राम प्रकार
+    syntax_error: 'सिंटेक्स त्रुटि: '
   settings:
     instructions: |
       डिफ़ॉल्ट स्थापना का उपयोग न कर रहे हों तो नीचे अपने Kroki सर्वर URL
