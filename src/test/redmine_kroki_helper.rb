@@ -1,57 +1,70 @@
 # frozen_string_literal: true
 
 require File.expand_path('../app/helpers/redmine_kroki_helper.rb', __dir__)
+require File.expand_path("#{File.dirname(__FILE__)}/../../../test/test_helper")
 
 # Integration tests with Kroki Server
 class RedmineKrokiHelperTest < ActionView::TestCase
   url = 'http://kroki:8000'
+  def RedmineKrokiHelper.l
+    'error'
+  end
 
   test 'convert_diagram with invalid diagram type raises' do
-    assert_raises(RuntimeError, /Cannot find the diagram/) do
+    error = assert_raises(RuntimeError) do
       convert_diagram(url, 'invalid', 'blockdiag {a -> b}')
     end
+    assert_equal 'Unknown diagram type "invalid"', error.message
   end
 
   test 'convert_diagram with invalid diagram content raises' do
-    assert_raises(RuntimeError, /syntax error/) do
+    error = assert_raises(RuntimeError) do
       convert_diagram(url, 'mermaid', '{a -->')
     end
+    assert_match(/^Syntax error:/, error.message)
   end
 
   test 'convert_diagram with no diagram type raises' do
-    assert_raises(RuntimeError, /Missing/) do
+    error = assert_raises(RuntimeError) do
       convert_diagram(url, nil, 'blockdiag {a --> b}')
     end
+
+    assert_equal 'Missing diagram type', error.message
   end
 
   test 'convert_diagram with empty diagram type raises' do
-    assert_raises(RuntimeError, /Missing/) do
+    error = assert_raises(RuntimeError) do
       convert_diagram(url, '', 'blockdiag {a --> b}')
     end
+    assert_equal 'Missing diagram type', error.message
   end
 
   test 'convert_diagram with no diagram content raises' do
-    assert_raises(RuntimeError, /Missing/) do
+    error = assert_raises(RuntimeError, /Missing/) do
       convert_diagram(url, 'mermaid', nil)
     end
+    assert_match(/Request body must not be empty/, error.message)
   end
 
   test 'convert_diagram with empty diagram content raises' do
-    assert_raises(RuntimeError, /Missing/) do
+    error = assert_raises(RuntimeError, /Missing/) do
       convert_diagram(url, 'mermaid', '')
     end
+    assert_match(/Request body must not be empty/, error.message)
   end
 
   test 'convert_diagram with no url raises' do
-    assert_raises(RuntimeError, /URL/) do
+    error = assert_raises(RuntimeError, /URL/) do
       convert_diagram(nil, 'mermaid', 'flowchart LR;  a --> b')
     end
+    assert_equal 'Missing Kroki URL', error.message
   end
 
   test 'convert_diagram with empty url raises' do
-    assert_raises(RuntimeError, /URL/) do
+    error = assert_raises(RuntimeError, /URL/) do
       convert_diagram('', 'mermaid', 'flowchart LR;  a --> b')
     end
+    assert_equal 'Missing Kroki URL', error.message
   end
 
   test 'convert_diagram renders mermaid' do
@@ -79,8 +92,8 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
-  test 'convert_diagram renders graphviz' do
-    diagram = convert_diagram(url, 'graphviz', 'digraph G {a->b}')
+  test 'convert_diagram renders actdiag' do
+    diagram = convert_diagram(url, 'actdiag', 'actdiag {a -> b}')
     assert_match(/<svg/, diagram)
   end
 
@@ -89,18 +102,21 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
-  test 'convert_diagram renders seqdiag' do
-    diagram = convert_diagram(url, 'seqdiag', 'seqdiag {a -> b}')
-    assert_match(/<svg/, diagram)
-  end
+  test 'convert_diagram renders bytefield' do
+    diagram = convert_diagram(url, 'bytefield', '
+        (defattrs :bg-green {:fill "#a0ffa0"})
 
-  test 'convert_diagram renders actdiag' do
-    diagram = convert_diagram(url, 'actdiag', 'actdiag {a -> b}')
-    assert_match(/<svg/, diagram)
-  end
+        (defn draw-group-label-header
+          [span label]
+          (draw-box (text label [:math {:font-size 12}]) {:span span :borders #{} :height 14}))
 
-  test 'convert_diagram renders rackdiag' do
-    diagram = convert_diagram(url, 'rackdiag', 'rackdiag {2U;1:A}')
+        (draw-box 0x11)
+        (draw-box (text "length" [:math] [:sub 2]) {:span 4})
+        (draw-box 0x14)
+        (draw-box (text "length" [:math] [:sub 2]) {:span 4})
+        (draw-gap "Unknown bytes" {:min-label-columns 6})
+        (draw-bottom)
+      ')
     assert_match(/<svg/, diagram)
   end
 
@@ -115,12 +131,8 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
-  test 'convert_diagram renders vegalite' do
-    diagram = convert_diagram(url, 'vegalite', '{
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "data": { "values": [{"name": 1, "value": 1}] },
-      "mark": "arc"
-    }')
+  test 'convert_diagram renders graphviz' do
+    diagram = convert_diagram(url, 'graphviz', 'digraph G {a->b}')
     assert_match(/<svg/, diagram)
   end
 
@@ -202,6 +214,25 @@ class RedmineKrokiHelperTest < ActionView::TestCase
       line right until even with X9 - ($r,0) \
         then up until even with X9 then to X9
     ')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders rackdiag' do
+    diagram = convert_diagram(url, 'rackdiag', 'rackdiag {2U;1:A}')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders seqdiag' do
+    diagram = convert_diagram(url, 'seqdiag', 'seqdiag {a -> b}')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders vegalite' do
+    diagram = convert_diagram(url, 'vegalite', '{
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "values": [{"name": 1, "value": 1}] },
+      "mark": "arc"
+    }')
     assert_match(/<svg/, diagram)
   end
 

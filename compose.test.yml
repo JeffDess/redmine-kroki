@@ -5,24 +5,7 @@ services:
   redmine:
     image: redmine:5-alpine
     environment:
-      REDMINE_DB_MYSQL: db
-      REDMINE_DB_PASSWORD: pass
       RAILS_ENV: test
     volumes:
       - ./src:/usr/src/redmine/plugins/redmine_kroki
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: always
-
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: redmine
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: always
+      - ./database.yml:/usr/src/redmine/config/database.yml
