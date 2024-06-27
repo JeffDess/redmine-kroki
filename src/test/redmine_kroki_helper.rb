@@ -120,19 +120,88 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
-  test 'convert_diagram renders D2' do
-    diagram = convert_diagram(url, 'd2', 'a -> b')
-    assert_match(/<svg/, diagram)
-  end
-
   test 'convert_diagram renders C4' do
     diagram = convert_diagram(url, 'c4plantuml', '!include <C4/C4_Context>
       Person(a, "")')
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram renders D2' do
+    diagram = convert_diagram(url, 'd2', 'a -> b')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders DBML' do
+    diagram = convert_diagram(url, 'dbml', '
+Table users {
+  id integer
+  username varchar
+}
+
+Table posts {
+  id integer [primary key]
+  title varchar
+  user_id integer
+}
+
+Ref: posts.user_id > users.id // many-to-one')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders Ditaa' do
+    diagram = convert_diagram(url, 'ditaa', "
+      +--------+
+      |        |
+      |  User  |
+      |        |
+      +--------+
+    ")
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders erd' do
+    diagram = convert_diagram(url, 'erd', "
+      [Person]
+      *name
+      height
+      weight
+      +birth_location_id
+
+      [Location]
+      *id
+      city
+      state
+      country
+
+      Person *--1 Location
+    ")
+    assert_match(/<svg/, diagram)
+  end
+
   test 'convert_diagram renders graphviz' do
     diagram = convert_diagram(url, 'graphviz', 'digraph G {a->b}')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders nwdiag' do
+    diagram = convert_diagram(url, 'nwdiag', '
+      nwdiag {
+        network dmz {
+          address = "210.x.x.x/24"
+
+          web01 [address = "210.x.x.1"];
+          web02 [address = "210.x.x.2"];
+        }
+        network internal {
+          address = "172.x.x.x/24";
+
+          web01 [address = "172.x.x.1"];
+          web02 [address = "172.x.x.2"];
+          db01;
+          db02;
+        }
+      }
+    ')
     assert_match(/<svg/, diagram)
   end
 
@@ -152,6 +221,34 @@ class RedmineKrokiHelperTest < ActionView::TestCase
       [Pirate]->[singing]
       [singing]<->[rum]
     ')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders packetDiag' do
+    diagram = convert_diagram(url, 'packetdiag', "
+      packetdiag {
+        colwidth = 32;
+        node_height = 72;
+
+        0-15: Source Port;
+        16-31: Destination Port;
+        32-63: Sequence Number;
+        64-95: Acknowledgment Number;
+        96-99: Data Offset;
+        100-105: Reserved;
+        106: URG [rotate = 270];
+        107: ACK [rotate = 270];
+        108: PSH [rotate = 270];
+        109: RST [rotate = 270];
+        110: SYN [rotate = 270];
+        111: FIN [rotate = 270];
+        112-127: Window;
+        128-143: Checksum;
+        144-159: Urgent Pointer;
+        160-191: (Options and Padding);
+        192-223: data [colheight = 3];
+      }
+    ")
     assert_match(/<svg/, diagram)
   end
 
@@ -217,6 +314,32 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram renders PlantUML' do
+    diagram = convert_diagram(url, 'plantuml', '
+      skinparam ranksep 20
+      skinparam dpi 125
+      skinparam packageTitleAlignment left
+
+      rectangle "Main" {
+        (main.view)
+        (singleton)
+      }
+      rectangle "Base" {
+        (base.component)
+        (component)
+        (model)
+      }
+      rectangle "<b>main.ts</b>" as main_ts
+
+      (component) ..> (base.component)
+      main_ts ==> (main.view)
+      (main.view) --> (component)
+      (main.view) ...> (singleton)
+      (singleton) ---> (model)
+    ')
+    assert_match(/<svg/, diagram)
+  end
+
   test 'convert_diagram renders rackdiag' do
     diagram = convert_diagram(url, 'rackdiag', 'rackdiag {2U;1:A}')
     assert_match(/<svg/, diagram)
@@ -227,12 +350,124 @@ class RedmineKrokiHelperTest < ActionView::TestCase
     assert_match(/<svg/, diagram)
   end
 
+  test 'convert_diagram renders structurizr' do
+    diagram = convert_diagram(url, 'structurizr', '
+       workspace {
+          model {
+              user = person "User"
+              softwareSystem = softwareSystem "Software System" {
+                  webapp = container "Web Application" {
+                      user -> this "Uses!!!"
+                  }
+                  database = container "Database" {
+                      webapp -> this "Reads from and writes to"
+                  }
+              }
+          }
+          views {
+              systemContext softwareSystem {
+                  include *
+                  autolayout lr
+              }
+              container softwareSystem {
+                  include *
+                  autolayout lr
+              }
+              theme default
+          }
+      }
+    ')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders svgbob' do
+    diagram = convert_diagram(url, 'svgbob', "
+                      .-,(  ),-.
+      ___  *.-(          )-.
+      [___]|=| -->(                )      __________
+      /::/ |*|     '-(          ).-' --->[_...__... ]
+                      '-.( ).-'
+                              \      ____   __
+                              '--->|    | |==|
+                                    |____| |  |
+                                    /::::/ |__|
+    ")
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders symbolator' do
+    diagram = convert_diagram(url, 'symbolator', '
+      module demo_device #(
+          //# {{}}
+          parameter SIZE = 8,
+          parameter RESET_ACTIVE_LEVEL = 1
+      ) (
+          //# {{clocks|Clocking}}
+          input wire clock,
+          //# {{control|Control signals}}
+          input wire reset,
+          input wire enable,
+          //# {{data|Data ports}}
+          input wire [SIZE-1:0] data_in,
+          output wire [SIZE-1:0] data_out
+      );
+        // ...
+      endmodule
+    ')
+    assert_match(/<svg/, diagram)
+  end
+
   test 'convert_diagram renders vegalite' do
     diagram = convert_diagram(url, 'vegalite', '{
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "data": { "values": [{"name": 1, "value": 1}] },
       "mark": "arc"
     }')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders wavedrom' do
+    diagram = convert_diagram(url, 'wavedrom', '{
+      signal: [
+        { name: "clk",         wave: "p.....|..." },
+        { name: "Data",        wave: "x.345x|=.x", data: ["head", "body", "tail", "data"] },
+        { name: "Request",     wave: "0.1..0|1.0" },
+        {},
+        { name: "Acknowledge", wave: "1.....|01." }
+      ]
+    }')
+    assert_match(/<svg/, diagram)
+  end
+
+  test 'convert_diagram renders wireviz' do
+    diagram = convert_diagram(url, 'wireviz', '
+      connectors:
+        X1:
+          type: D-Sub
+          subtype: female
+          pinlabels: [DCD, RX, TX, DTR, GND, DSR, RTS, CTS, RI]
+        X2:
+          type: Molex KK 254
+          subtype: female
+          pinlabels: [GND, RX, TX]
+
+      cables:
+        W1:
+          gauge: 0.25 mm2
+          length: 0.2
+          color_code: DIN
+          wirecount: 3
+          shield: true
+
+      connections:
+        -
+          - X1: [5,2,3]
+          - W1: [1,2,3]
+          - X2: [1,3,2]
+        -
+          - X1: 5
+          - W1: s
+    ')
     assert_match(/<svg/, diagram)
   end
 
