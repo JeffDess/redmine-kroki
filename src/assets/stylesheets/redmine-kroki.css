@@ -32,3 +32,10 @@
 .kroki.dark svg {
   filter: invert(1) hue-rotate(180deg);
 }
+
+/* Mermaid */
+/* NOTE: Bold text is truncated in graph labels */
+.kroki .flowchart-label .cluster-label foreignObject,
+.kroki .flowchart-label .label foreignObject {
+  overflow: visible;
+}
