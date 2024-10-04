@@ -231,17 +231,17 @@ If you run into other problems, please feel free to [open an issue](//github.com
 **Prerequisite**: Docker and Docker Compose installed
 
 1. Clone this repository
-2. Run `docker-compose up`
+2. Execute `make run`
 3. Visit <http://localhost:8080>
 
 ### Tests
 
-* Tests can be run with `scripts/test.sh`.
+* Tests can be run with `make test`.
 * It will spawn test containers so it won't interfere with your development
   environment.
 * These containers will keep running after the test has completed, so invoke
   the command again to rerun it quickly.
-* When you are done, run `scripts/test.sh --down` to kill the containers.
+* When you are done, run `make test-down` to kill the containers.
 
 ## References
 
