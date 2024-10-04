@@ -16,6 +16,9 @@ run:
 test:
 	@./scripts/test.sh
 
+test-stop:
+	@./scripts/test.sh --stop
+
 test-ci:
 	@./scripts/test-ci.sh
 
