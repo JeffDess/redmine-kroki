@@ -23,6 +23,7 @@ module RedmineKrokiHelper
     type = diagram_type.downcase.delete(' -')
     url = URI.parse("#{kroki_url}/#{type}/svg")
     http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = URI.parse(kroki_url).scheme == 'https'
     req = Net::HTTP::Post.new(url.path)
 
     req.content_type = 'text/plain'
