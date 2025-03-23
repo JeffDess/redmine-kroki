@@ -49,12 +49,10 @@ just make sure the Kroki server is reachable from your Redmine instance.
 
 ### Kroki server
 
-If you have the suggested setup, then the default configuration should be
-working for you.
-
-Otherwise, head to _Administration > Plugins > Redmine-Kroki_ and input your
-Kroki server URL, including the protocol (_http://_ or _https://_) and the port
-number (typically 8000).
+Head to _Administration > Plugins > Redmine-Kroki_ and input your Kroki server
+URL, including the protocol (_http://_ or _https://_) and the port number
+(typically 8000). If you have the suggested setup, then the default configuration
+should be working for you, just save the settings without any changes.
 
    Examples:
 
