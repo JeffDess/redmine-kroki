@@ -560,4 +560,41 @@ Ref: posts.user_id > users.id // many-to-one')
   test 'only_digits? with multi-digit px returns false' do
     assert_equal(false, only_digits?('123456px'))
   end
+
+  test 'embed_fonts returns excalifont style for excalidraw' do
+    result = embed_fonts('excalidraw')
+    assert_match(/@font-face/, result)
+    assert_match(/font-family: 'Excalifont'/, result)
+    assert_match(/Excalifont-Regular\.woff2/, result)
+  end
+
+  test 'embed_fonts returns empty string for other diagram types' do
+    result = embed_fonts('mermaid')
+    assert_equal('', result)
+
+    result = embed_fonts('plantuml')
+    assert_equal('', result)
+
+    result = embed_fonts('graphviz')
+    assert_equal('', result)
+  end
+
+  test 'embed_fonts returns empty string for nil or empty diagram type' do
+    result = embed_fonts(nil)
+    assert_equal('', result)
+
+    result = embed_fonts('')
+    assert_equal('', result)
+  end
+
+  test 'embed_fonts is case insensitive for excalidraw' do
+    result = embed_fonts('Excalidraw')
+    assert_match(/@font-face/, result)
+
+    result = embed_fonts('EXCALIDRAW')
+    assert_match(/@font-face/, result)
+
+    result = embed_fonts('ExCaLiDrAw')
+    assert_match(/@font-face/, result)
+  end
 end
