@@ -39,3 +39,8 @@
 .kroki .flowchart-label .label foreignObject {
   overflow: visible;
 }
+
+/* Excalidraw */
+.kroki.excalidraw svg text {
+  font-family: "Excalifont", sans-serif !important;
+}

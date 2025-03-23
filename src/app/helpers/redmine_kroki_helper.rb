@@ -54,12 +54,33 @@ def parse_macro_options(options)
   options.map { |option| option.split('=') }.to_h.transform_keys(&:to_sym)
 end
 
-def wrap_diagram(diagram, classes, options)
+def embed_fonts(diagram_type)
+  return '' unless diagram_type
+
+  case diagram_type.downcase
+  when 'excalidraw'
+    <<~CSS
+      <style>
+        @font-face {
+          font-family: 'Excalifont';
+          src: url('/plugin_assets/redmine_kroki/fonts/Excalifont-Regular.woff2') format('woff2');
+          font-display: swap;
+        }
+      </style>
+    CSS
+  else
+    ''
+  end
+end
+
+def wrap_diagram(diagram, classes, options, diagram_type = nil)
   version = Redmine::Plugin.registered_plugins[:redmine_kroki].version
   href = "/plugin_assets/redmine_kroki/stylesheets/redmine-kroki.css?v=#{version}"
   style_tag = "<link rel='stylesheet' type='text/css' href='#{href}' />"
+  style_tag = style_tag + embed_fonts(diagram_type)
   styles = convert_options_to_style(options)
   classes = classes.dup << ' resized' unless styles.empty?
+  classes = classes.dup << " #{diagram_type.downcase.delete(' -')}" if diagram_type
 
   "#{style_tag}<div class=\"#{classes}\" style=\"#{styles}\">#{diagram}</div>"
 end
