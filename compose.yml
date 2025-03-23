@@ -10,6 +10,7 @@ services:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: pass
       REDMINE_PLUGINS_MIGRATE: true
+      REDMINE_SECRET_KEY_BASE: secret_that_should_be_changed
     volumes:
       - ./src:/usr/src/redmine/plugins/redmine_kroki
     depends_on:
