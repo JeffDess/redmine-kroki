@@ -1,3 +1,9 @@
+.PHONY: build diagrams halt lint restart run test test-stop test-ci watch
+.DEFAULT_GOAL := build
+
+build:
+	docker compose build
+
 diagrams:
 	@./scripts/combine-diagrams.sh
 
@@ -8,7 +14,8 @@ lint:
 	@yamllint .
 
 restart:
-	@docker compose down && docker compose up -d
+	@docker compose down redmine5 redmine6 \
+		&& docker compose up -d redmine5 redmine6
 
 run:
 	@docker compose up -d
@@ -24,4 +31,3 @@ test-ci:
 
 watch:
 	@./scripts/watch.sh
-
