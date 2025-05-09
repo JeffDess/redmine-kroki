@@ -67,8 +67,7 @@ end
 
 def wrap_diagram(diagram, classes, options, diagram_type = nil)
   version = Redmine::Plugin.registered_plugins[:redmine_kroki].version
-  href = "/plugin_assets/redmine_kroki/stylesheets/redmine-kroki.css?v=#{version}"
-  style_tag = "<link rel='stylesheet' type='text/css' href='#{href}' />"
+  style_tag = generate_css_tag('redmine-kroki')
   style_tag = style_tag + embed_fonts(diagram_type)
   styles = convert_options_to_style(options)
   classes = classes.dup << ' resized' unless styles.empty?
