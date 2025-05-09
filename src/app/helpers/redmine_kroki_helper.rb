@@ -59,17 +59,9 @@ def embed_fonts(diagram_type)
 
   case diagram_type.downcase
   when 'excalidraw'
-    <<~CSS
-      <style>
-        @font-face {
-          font-family: 'Excalifont';
-          src: url('/plugin_assets/redmine_kroki/fonts/Excalifont-Regular.woff2') format('woff2');
-          font-display: swap;
-        }
-      </style>
-    CSS
+    generate_css_tag('excalidraw')
   else
-    ''
+    ''.html_safe
   end
 end
 
@@ -119,4 +111,8 @@ end
 
 def get_user_theme(user)
   user.preference.respond_to?('theme') ? user.preference.theme : nil
+end
+
+def generate_css_tag (filename)
+  stylesheet_link_tag filename, plugin: "redmine_kroki"
 end
