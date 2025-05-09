@@ -2,32 +2,36 @@ name: redmine_kroki
 include:
   - compose.kroki.yml
 services:
-  redmine:
-    image: redmine:5-alpine
+  redmine5:
+    build:
+      context: .
+      args:
+        TAG: 5-alpine
+        THEME_PATH: /usr/src/redmine/public/themes
     ports:
-      - 8080:3000
+      - 8085:3000
     environment:
-      REDMINE_DB_MYSQL: db
-      REDMINE_DB_PASSWORD: pass
       REDMINE_PLUGINS_MIGRATE: true
-      REDMINE_SECRET_KEY_BASE: secret_that_should_be_changed
     volumes:
-      - ./src:/usr/src/redmine/plugins/redmine_kroki
-    depends_on:
-      db:
-        condition: service_healthy
-    restart: always
+      - ./src:/usr/src/redmine/plugins/redmine_kroki/
+      - data-v5:/usr/src/redmine/sqlite/
+    restart: on-failure:3
 
-  db:
-    image: mysql:8.0
+  redmine6:
+    build:
+      context: .
+      args:
+        TAG: 6-alpine
+        THEME_PATH: /usr/src/redmine/themes
+    ports:
+      - 8086:3000
     environment:
-      MYSQL_ROOT_PASSWORD: pass
-      MYSQL_DATABASE: redmine
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      REDMINE_PLUGINS_MIGRATE: true
     volumes:
-      - ./database/data:/var/lib/mysql
-    restart: always
+      - ./src:/usr/src/redmine/plugins/redmine_kroki/
+      - data-v6:/usr/src/redmine/sqlite/
+    restart: on-failure:3
+
+volumes:
+  data-v5:
+  data-v6:
