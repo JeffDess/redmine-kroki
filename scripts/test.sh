@@ -5,7 +5,7 @@ NEEDS_UP=$(docker ps --format '{{.Names}}' | grep -c 'redmine_kroki_test')
 if [ "$NEEDS_UP" -lt 6 ]; then
   docker compose -f compose.test.yml up -d
   echo "Server is starting up..."
-  sleep 10
+  sleep 12
 fi
 
 docker compose -f compose.test.yml exec redmine sh -c "\
