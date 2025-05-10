@@ -239,7 +239,7 @@ If you run into other problems, please feel free to [open an issue](//github.com
   environment.
 * These containers will keep running after the test has completed, so invoke
   the command again to rerun it quickly.
-* When you are done, run `make test-down` to kill the containers.
+* When you are done, run `make test-stop` to kill the containers.
 
 ## References
 
