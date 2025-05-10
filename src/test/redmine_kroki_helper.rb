@@ -561,11 +561,10 @@ Ref: posts.user_id > users.id // many-to-one')
     assert_equal(false, only_digits?('123456px'))
   end
 
-  test 'embed_fonts returns excalifont style for excalidraw' do
+  test 'embed_fonts returns excalidraw.css for excalidraw' do
     result = embed_fonts('excalidraw')
-    assert_match(/@font-face/, result)
-    assert_match(/font-family: 'Excalifont'/, result)
-    assert_match(/Excalifont-Regular\.woff2/, result)
+    assert_match(/\<link rel="stylesheet"/, result)
+    assert_match(/\/excalidraw\.css/, result)
   end
 
   test 'embed_fonts returns empty string for other diagram types' do
@@ -589,12 +588,12 @@ Ref: posts.user_id > users.id // many-to-one')
 
   test 'embed_fonts is case insensitive for excalidraw' do
     result = embed_fonts('Excalidraw')
-    assert_match(/@font-face/, result)
+    assert_match(/excalidraw/, result)
 
     result = embed_fonts('EXCALIDRAW')
-    assert_match(/@font-face/, result)
+    assert_match(/excalidraw/, result)
 
     result = embed_fonts('ExCaLiDrAw')
-    assert_match(/@font-face/, result)
+    assert_match(/excalidraw/, result)
   end
 end
