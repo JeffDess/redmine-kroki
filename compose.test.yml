@@ -3,7 +3,7 @@ include:
   - compose.kroki.yml
 services:
   redmine:
-    image: redmine:5-alpine
+    image: redmine:${REDMINE_VERSION:-6}-alpine
     environment:
       RAILS_ENV: test
     volumes:
