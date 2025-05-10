@@ -24,7 +24,7 @@ test:
 	@./scripts/test.sh
 
 test-stop:
-	@./scripts/test.sh --stop
+	@./scripts/test.sh --down
 
 test-ci:
 	@./scripts/test-ci.sh
