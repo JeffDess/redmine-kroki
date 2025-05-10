@@ -29,7 +29,8 @@ there are no files to deal with!
 The easiest way to get this initial setup is to run your Redmine instance along
 with the Kroki servers from a Docker Compose project (you can just include the
 [compose.kroki](compose.kroki.yml) file in your existing project). Have
-a look at the other compose files in the source code to get you started.
+a look at the [example compose file](compose.example.yml) in the source code to
+get you started.
 
 ### Other setups
 

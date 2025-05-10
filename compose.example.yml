@@ -1,0 +1,33 @@
+name: redmine_example_setup
+include:
+  - compose.kroki.yml
+services:
+  redmine:
+    image: redmine:6-alpine
+    ports:
+      - 8080:3000
+    environment:
+      REDMINE_DB_MYSQL: db
+      REDMINE_DB_PASSWORD: pass
+      REDMINE_PLUGINS_MIGRATE: true
+      REDMINE_SECRET_KEY_BASE: secret_that_should_be_changed
+    volumes:
+      - ./src:/usr/src/redmine/plugins/redmine_kroki
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_DATABASE: redmine
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./database/data:/var/lib/mysql
+    restart: always
