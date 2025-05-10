@@ -20,7 +20,7 @@ there are no files to deal with!
 
 ## Prerequisites
 
-* A Redmine installation (only v5 tested so far)
+* A Redmine installation (v5 or v6, untested with earlier versions)
 * A Kroki server with optional services (Mermaid, BPML, Excalidraw and
   Diagrams.net)
 
@@ -72,7 +72,9 @@ this section if you aren't using any.
   selected by the current user matches one value of the list. This option was
   made with [Redmine Theme Changer](https://github.com/haru/redmine_theme_changer)
   in mind. Enter theme names separated by a single spaces (same as in the path
-  `redmine/public/themes/...`). Default: `dark-theme redmine-theme-dark`
+  `redmine/public/themes/...` in Redmine <= 5 or `redmine/themes/...` in
+  Redmine 6).
+  Default: `dark-theme redmine-theme-dark`
 
 <details>
   <summary>Visual Example</summary>
