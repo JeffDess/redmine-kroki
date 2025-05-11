@@ -233,7 +233,9 @@ If you run into other problems, please feel free to [open an issue](//github.com
 
 1. Clone this repository
 2. Execute `make run`
-3. Visit <http://localhost:8080>
+3. Visit:
+   * Redmine 5: <http://localhost:8085>
+   * Redmine 6: <http://localhost:8086>
 
 ### Tests
 
