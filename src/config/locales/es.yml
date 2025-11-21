@@ -18,3 +18,4 @@ es:
       dark_theme_names_note: |
         Ingrese una lista separada por espacios de nombres de temas que
         requieran texto claro sobre fondo oscuro.
+      fontawesome_css_url: 'URL del CSS de Font Awesome:'

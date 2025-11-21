@@ -18,3 +18,4 @@ de:
       dark_theme_names_note: |
         Geben Sie eine durch Leerzeichen getrennte Liste von Themennamen ein,
         die hellen Text auf dunklem Hintergrund erfordern.
+      fontawesome_css_url: 'Font Awesome CSS-URL:'

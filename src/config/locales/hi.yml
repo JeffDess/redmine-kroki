@@ -18,3 +18,4 @@ hi:
       dark_theme_names_note: |
         एक स्थान से अलग थीम नामों की सूची दर्ज करें जिनमें हल्का
         पाठ डार्क पृष्ठभूमि पर आवश्यक हो।
+      fontawesome_css_url: 'Font Awesome CSS का URL:'

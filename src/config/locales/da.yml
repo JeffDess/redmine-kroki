@@ -18,3 +18,4 @@ da:
       dark_theme_names_note: |
         Indtast en mellemrum adskilt liste af temanavne, der kræver lys tekst på
         mørk baggrund.
+      fontawesome_css_url: 'Font Awesome CSS URL:'

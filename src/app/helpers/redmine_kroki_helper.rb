@@ -26,9 +26,8 @@ module RedmineKrokiHelper
   end
 
   def wrap_diagram(diagram, classes, options, diagram_type = nil)
-    version = Redmine::Plugin.registered_plugins[:redmine_kroki].version
     style_tag = generate_css_tag('redmine-kroki')
-    style_tag = style_tag + embed_fonts(diagram_type)
+    style_tag += embed_fonts(diagram_type, diagram)
     styles = convert_options_to_style(options)
     classes = classes.dup << ' resized' unless styles.empty?
     classes = classes.dup << " #{diagram_type.downcase.delete(' -')}" if diagram_type
@@ -77,15 +76,23 @@ module RedmineKrokiHelper
     end
   end
 
-  def embed_fonts(diagram_type)
-    return '' unless diagram_type
+  def embed_fonts(diagram_type, diagram)
+    return ''.html_safe unless diagram_type
 
     case diagram_type.downcase
     when 'excalidraw'
       generate_css_tag('excalidraw')
+    when 'mermaid'
+      generate_fa_css_tag(diagram)
     else
       ''.html_safe
     end
+  end
+
+  def generate_fa_css_tag(_diagram)
+    fa_url = Setting.plugin_redmine_kroki[:fontawesome_css] ||
+             Redmine::Plugin.find(:redmine_kroki).settings[:default]['fontawesome_css']
+    stylesheet_link_tag fa_url
   end
 
   def only_digits?(value)
@@ -114,6 +121,6 @@ module RedmineKrokiHelper
   end
 
   def generate_css_tag(filename)
-    stylesheet_link_tag filename, plugin: "redmine_kroki"
+    stylesheet_link_tag filename, plugin: 'redmine_kroki'
   end
 end

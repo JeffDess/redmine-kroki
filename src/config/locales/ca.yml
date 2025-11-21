@@ -18,3 +18,4 @@ ca:
       dark_theme_names_note: |
         Introdueix una llista separada per espais dels noms dels temes que
         requereixen text clar en un fons fosc.
+      fontawesome_css_url: 'URL del CSS de Font Awesome:'

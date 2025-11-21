@@ -16,3 +16,4 @@ zh:
       dark_theme_names: '深色主题名称：'
       dark_theme_names_note: |
         输入一个用空格分隔的主题名称列表，要求在深色背景上使用浅色文本。
+      fontawesome_css_url: 'Font Awesome CSS 地址：'

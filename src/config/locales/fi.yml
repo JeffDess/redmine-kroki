@@ -17,3 +17,4 @@ fi:
       dark_theme_names_note: |
         Syötä välilyönnein erotettu luettelo teemanimistä, jotka vaativat
         vaalean tekstin tummalla taustalla.
+      fontawesome_css_url: 'Font Awesome CSS-URL:'
