@@ -17,3 +17,4 @@ ja:
       dark_theme_names: 'ダークテーマ名：'
       dark_theme_names_note: |
         明るいテキストが必要なテーマ名のスペースで区切られたリストを入力してください。
+      fontawesome_css_url: 'Font Awesome の CSS URL：'

@@ -18,3 +18,4 @@ ru:
       dark_theme_names_note: |
         Введите список имен тем, разделенных пробелом, требующих светлого текста
         на темном фоне.
+      fontawesome_css_url: 'URL CSS-файла Font Awesome:'

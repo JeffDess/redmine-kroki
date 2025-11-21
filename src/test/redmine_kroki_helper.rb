@@ -562,38 +562,54 @@ Ref: posts.user_id > users.id // many-to-one')
   end
 
   test 'embed_fonts returns excalidraw.css for excalidraw' do
-    result = embed_fonts('excalidraw')
+    result = embed_fonts('excalidraw', 'diagram content')
     assert_match(/\<link rel="stylesheet"/, result)
     assert_match(/\/excalidraw\.css/, result)
   end
 
+  test 'embed_fonts returns Font Awesome CSS for mermaid' do
+    result = embed_fonts('mermaid', 'flowchart LR; a --> b')
+    assert_match(/\<link rel="stylesheet"/, result)
+  end
+
   test 'embed_fonts returns empty string for other diagram types' do
-    result = embed_fonts('mermaid')
+    result = embed_fonts('plantuml', 'a -> b')
     assert_equal('', result)
 
-    result = embed_fonts('plantuml')
+    result = embed_fonts('graphviz', 'digraph G {a->b}')
     assert_equal('', result)
 
-    result = embed_fonts('graphviz')
+    result = embed_fonts('blockdiag', 'blockdiag {a -> b}')
     assert_equal('', result)
   end
 
   test 'embed_fonts returns empty string for nil or empty diagram type' do
-    result = embed_fonts(nil)
+    result = embed_fonts(nil, 'diagram content')
     assert_equal('', result)
 
-    result = embed_fonts('')
+    result = embed_fonts('', 'diagram content')
     assert_equal('', result)
   end
 
   test 'embed_fonts is case insensitive for excalidraw' do
-    result = embed_fonts('Excalidraw')
+    result = embed_fonts('Excalidraw', 'diagram content')
     assert_match(/excalidraw/, result)
 
-    result = embed_fonts('EXCALIDRAW')
+    result = embed_fonts('EXCALIDRAW', 'diagram content')
     assert_match(/excalidraw/, result)
 
-    result = embed_fonts('ExCaLiDrAw')
+    result = embed_fonts('ExCaLiDrAw', 'diagram content')
     assert_match(/excalidraw/, result)
+  end
+
+  test 'embed_fonts is case insensitive for mermaid' do
+    result = embed_fonts('Mermaid', 'flowchart LR; a --> b')
+    assert_match(/\<link rel="stylesheet"/, result)
+
+    result = embed_fonts('MERMAID', 'flowchart LR; a --> b')
+    assert_match(/\<link rel="stylesheet"/, result)
+
+    result = embed_fonts('MeRmAiD', 'flowchart LR; a --> b')
+    assert_match(/\<link rel="stylesheet"/, result)
   end
 end

@@ -40,6 +40,11 @@
   overflow: visible;
 }
 
+.kroki.mermaid foreignObject:has(.fa) {
+  width: 100%;
+  transform: translateX(-8px);
+}
+
 /* Excalidraw */
 .kroki.excalidraw svg text {
   font-family: "Excalifont", sans-serif !important;

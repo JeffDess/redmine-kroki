@@ -27,3 +27,10 @@
     </small>
   </p>
 </fieldset>
+<fieldset class="kroki-fieldset">
+  <legend class="kroki-legend">Mermaid</legend>
+  <span class="kroki-textfield">
+    <%= label_tag :settings_fontawesome_css, l('settings.display.fontawesome_css_url') %>
+    <%= text_field_tag "settings[fontawesome_css]", @settings["fontawesome_css"] || Redmine::Plugin.find(:redmine_kroki).settings[:default]['fontawesome_css'] %>
+  </span>
+</fieldset>
