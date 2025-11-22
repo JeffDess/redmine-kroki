@@ -63,10 +63,18 @@ module RedmineKrokiHelper
   end
 
   def sanitize_diagram(diagram_type, diagram_content)
-    return diagram_content.tr("\r", "\n") \
-      if diagram_type == 'nomnoml' && !diagram_content.nil?
+    return nil if diagram_content.nil?
 
-    diagram_content
+    case diagram_type.downcase
+    when 'nomnoml'
+      diagram_content.tr("\r", "\n")
+    when 'mermaid'
+      # HACK: Kroki doesn't correctly size boxes with icons but no text
+      copyless_icon_regex = /([(\[])fa:([\w-]+)\s*([)\]])/
+      diagram_content.gsub(copyless_icon_regex, '\1&nbsp; fa:\2 &nbsp;\3')
+    else
+      diagram_content
+    end
   end
 
   def add_diagram_options(request, options)
