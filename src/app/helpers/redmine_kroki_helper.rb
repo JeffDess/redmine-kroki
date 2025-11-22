@@ -89,9 +89,12 @@ module RedmineKrokiHelper
     end
   end
 
-  def generate_fa_css_tag(_diagram)
+  def generate_fa_css_tag(diagram)
+    return ''.html_safe unless diagram.include?('<i class="fa')
+
     fa_url = Setting.plugin_redmine_kroki[:fontawesome_css] ||
              Redmine::Plugin.find(:redmine_kroki).settings[:default]['fontawesome_css']
+
     stylesheet_link_tag fa_url
   end
 
