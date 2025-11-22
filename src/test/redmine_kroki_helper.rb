@@ -563,23 +563,28 @@ Ref: posts.user_id > users.id // many-to-one')
 
   test 'embed_fonts returns excalidraw.css for excalidraw' do
     result = embed_fonts('excalidraw', 'diagram content')
-    assert_match(/\<link rel="stylesheet"/, result)
-    assert_match(/\/excalidraw\.css/, result)
+    assert_match(/<link rel="stylesheet"/, result)
+    assert_match(%r{/excalidraw\.css}, result)
   end
 
-  test 'embed_fonts returns Font Awesome CSS for mermaid' do
-    result = embed_fonts('mermaid', 'flowchart LR; a --> b')
-    assert_match(/\<link rel="stylesheet"/, result)
+  test 'embed_fonts returns Font Awesome CSS for mermaid with FA icons in SVG' do
+    result = embed_fonts('mermaid', '<i class="fa fa-test"></i> label')
+    assert_match(/<link rel="stylesheet"/, result)
+  end
+
+  test 'embed_fonts returns empty string for mermaid without FA icons' do
+    result = embed_fonts('mermaid', 'diagram content')
+    assert_equal('', result)
   end
 
   test 'embed_fonts returns empty string for other diagram types' do
-    result = embed_fonts('plantuml', 'a -> b')
+    result = embed_fonts('plantuml', 'diagram content')
     assert_equal('', result)
 
-    result = embed_fonts('graphviz', 'digraph G {a->b}')
+    result = embed_fonts('graphviz', 'diagram content')
     assert_equal('', result)
 
-    result = embed_fonts('blockdiag', 'blockdiag {a -> b}')
+    result = embed_fonts('blockdiag', 'diagram content')
     assert_equal('', result)
   end
 
@@ -602,14 +607,63 @@ Ref: posts.user_id > users.id // many-to-one')
     assert_match(/excalidraw/, result)
   end
 
-  test 'embed_fonts is case insensitive for mermaid' do
-    result = embed_fonts('Mermaid', 'flowchart LR; a --> b')
-    assert_match(/\<link rel="stylesheet"/, result)
+  test 'embed_fonts is case insensitive for mermaid with FA icons' do
+    svg_with_fa = '<i class="fa fa-test"></i> label'
 
-    result = embed_fonts('MERMAID', 'flowchart LR; a --> b')
-    assert_match(/\<link rel="stylesheet"/, result)
+    result = embed_fonts('Mermaid', svg_with_fa)
+    assert_match(/<link rel="stylesheet"/, result)
 
-    result = embed_fonts('MeRmAiD', 'flowchart LR; a --> b')
-    assert_match(/\<link rel="stylesheet"/, result)
+    result = embed_fonts('MERMAID', svg_with_fa)
+    assert_match(/<link rel="stylesheet"/, result)
+
+    result = embed_fonts('MeRmAiD', svg_with_fa)
+    assert_match(/<link rel="stylesheet"/, result)
+  end
+
+  test 'sanitize_diagram fixes missing word after FontAwesome icon in mermaid with parens' do
+    input = 'flowchart LR; a(fa:fa-spinner)'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; a(&nbsp; fa:fa-spinner &nbsp;)', result)
+  end
+
+  test 'sanitize_diagram fixes missing word after FontAwesome icon in mermaid with brackets' do
+    input = 'flowchart LR; a[fa:fa-spinner]'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; a[&nbsp; fa:fa-spinner &nbsp;]', result)
+  end
+
+  test 'sanitize_diagram fixes missing word with space after FontAwesome icon in mermaid' do
+    input = 'flowchart LR; a(fa:fa-spinner )'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; a(&nbsp; fa:fa-spinner &nbsp;)', result)
+  end
+
+  test 'sanitize_diagram does not modify valid FontAwesome pattern in mermaid' do
+    input = 'flowchart LR; a(fa:fa-spinner Loading)'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; a(fa:fa-spinner Loading)', result)
+  end
+
+  test 'sanitize_diagram does not modify FontAwesome when preceded by text' do
+    input = 'flowchart LR; a(word fa:fa-spinner)'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; a(word fa:fa-spinner)', result)
+  end
+
+  test 'sanitize_diagram handles multiple invalid FontAwesome patterns in mermaid' do
+    input = 'flowchart LR; a(fa:fa-spinner); b[fa:fa-check]'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; a(&nbsp; fa:fa-spinner &nbsp;); b[&nbsp; fa:fa-check &nbsp;]', result)
+  end
+
+  test 'sanitize_diagram does not modify non-mermaid diagrams' do
+    input = '(fa:fa-spinner)'
+    result = sanitize_diagram('plantuml', input)
+    assert_equal('(fa:fa-spinner)', result)
+  end
+
+  test 'sanitize_diagram handles nil content for mermaid' do
+    result = sanitize_diagram('mermaid', nil)
+    assert_nil(result)
   end
 end
