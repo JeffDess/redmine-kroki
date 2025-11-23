@@ -100,10 +100,10 @@ module RedmineKrokiHelper
   def generate_fa_css_tag(diagram)
     return ''.html_safe unless diagram.include?('<i class="fa')
 
-    stylesheet_link_tag getSettingOrDefault('fontawesome_css')
+    stylesheet_link_tag get_setting_or_default('fontawesome_css')
   end
 
-  def getSettingOrDefault(setting)
+  def get_setting_or_default(setting)
     Setting.plugin_redmine_kroki[:"#{setting}"] ||
              Redmine::Plugin.find(:redmine_kroki).settings[:default][setting]
   end
