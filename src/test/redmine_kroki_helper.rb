@@ -670,19 +670,19 @@ Ref: posts.user_id > users.id // many-to-one')
   test 'sanitize_diagram fixes missing word after FontAwesome icon in mermaid with arrow' do
     input = 'flowchart LR; A>fa:fa-check]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A>&nbsp; fa:fa-check&nbsp;&nbsp;]', result)
+    assert_equal('flowchart LR; A>&nbsp;&nbsp;fa:fa-check&nbsp;&nbsp;&nbsp;]', result)
   end
 
   test 'sanitize_diagram handles FontAwesome icon with text in arrow shape' do
     input = 'flowchart LR; A>fa:fa-check Done]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A>&nbsp; fa:fa-check Done&nbsp;&nbsp;]', result)
+    assert_equal('flowchart LR; A>&nbsp;&nbsp;fa:fa-check Done&nbsp;&nbsp;&nbsp;]', result)
   end
 
   test 'sanitize_diagram handles double circle with no text' do
     input = 'flowchart LR; A(((fa:fa-user)))'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A(((&nbsp;&nbsp; fa:fa-user &nbsp;&nbsp;&nbsp;)))', result)
+    assert_equal('flowchart LR; A(((&nbsp; fa:fa-user &nbsp;&nbsp;&nbsp;)))', result)
   end
 
   test 'sanitize_diagram handles double circle with text' do
@@ -694,132 +694,132 @@ Ref: posts.user_id > users.id // many-to-one')
   test 'sanitize_diagram handles circle with no text' do
     input = 'flowchart LR; A((fa:fa-user))'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A((&nbsp;&nbsp; fa:fa-user &nbsp;&nbsp;&nbsp;))', result)
+    assert_equal('flowchart LR; A((&nbsp;&nbsp; fa:fa-user &nbsp;&nbsp;&nbsp;&nbsp;))', result)
   end
 
   test 'sanitize_diagram handles circle with text' do
     input = 'flowchart LR; A((fa:fa-user User))'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A((&nbsp; fa:fa-user User &nbsp;&nbsp;))', result)
+    assert_equal('flowchart LR; A((&nbsp; fa:fa-user User &nbsp;&nbsp;&nbsp;))', result)
   end
 
   test 'sanitize_diagram handles stadium shape with no text' do
     input = 'flowchart LR; A([fa:fa-database])'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A([&nbsp; fa:fa-database &nbsp;])', result)
+    assert_equal('flowchart LR; A([&nbsp; fa:fa-database &nbsp;&nbsp;])', result)
   end
 
   test 'sanitize_diagram handles stadium shape with text' do
     input = 'flowchart LR; A([fa:fa-database Database])'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A([&nbsp; fa:fa-database Database &nbsp;])', result)
+    assert_equal('flowchart LR; A([&nbsp; fa:fa-database Database &nbsp;&nbsp;])', result)
   end
 
   test 'sanitize_diagram handles subroutine shape with no text' do
     input = 'flowchart LR; A[[fa:fa-cog]]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[[&nbsp; fa:fa-cog &nbsp;]]', result)
+    assert_equal('flowchart LR; A[[&nbsp; fa:fa-cog &nbsp;&nbsp;&nbsp;]]', result)
   end
 
   test 'sanitize_diagram handles subroutine shape with text' do
     input = 'flowchart LR; A[[fa:fa-cog Process]]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[[&nbsp; fa:fa-cog Process &nbsp;]]', result)
+    assert_equal('flowchart LR; A[[&nbsp; fa:fa-cog Process &nbsp;&nbsp;&nbsp;]]', result)
   end
 
   test 'sanitize_diagram handles cylindrical shape with no text' do
     input = 'flowchart LR; A[(fa:fa-hdd)]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[(&nbsp; fa:fa-hdd &nbsp;)]', result)
+    assert_equal('flowchart LR; A[(&nbsp; fa:fa-hdd &nbsp;&nbsp;&nbsp;)]', result)
   end
 
   test 'sanitize_diagram handles cylindrical shape with text' do
     input = 'flowchart LR; A[(fa:fa-hdd Storage)]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[(&nbsp; fa:fa-hdd Storage &nbsp;)]', result)
+    assert_equal('flowchart LR; A[(&nbsp; fa:fa-hdd Storage &nbsp;&nbsp;&nbsp;)]', result)
   end
 
   test 'sanitize_diagram handles hexagon shape with no text' do
     input = 'flowchart LR; A{{fa:fa-code}}'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A{{&nbsp; fa:fa-code &nbsp;}}', result)
+    assert_equal('flowchart LR; A{{&nbsp;fa:fa-code&nbsp;&nbsp;}}', result)
   end
 
   test 'sanitize_diagram handles hexagon shape with text' do
     input = 'flowchart LR; A{{fa:fa-code Function}}'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A{{&nbsp; fa:fa-code Function &nbsp;}}', result)
+    assert_equal('flowchart LR; A{{&nbsp;fa:fa-code Function&nbsp;&nbsp;}}', result)
   end
 
   test 'sanitize_diagram handles parallelogram shape type 1 with no text' do
     input = 'flowchart LR; A[/fa:fa-file/]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[/&nbsp; fa:fa-file/]', result)
+    assert_equal('flowchart LR; A[/&nbsp;fa:fa-file &nbsp;/]', result)
   end
 
   test 'sanitize_diagram handles parallelogram shape type 1 with text' do
     input = 'flowchart LR; A[/fa:fa-file Input/]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[/&nbsp; fa:fa-file Input/]', result)
+    assert_equal('flowchart LR; A[/&nbsp;fa:fa-file Input &nbsp;/]', result)
   end
 
   test 'sanitize_diagram handles parallelogram shape type 2 with no text' do
     input = 'flowchart LR; A[\\fa:fa-file\\]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[\\&nbsp; fa:fa-file &nbsp;\\]', result)
+    assert_equal('flowchart LR; A[\\&nbsp; fa:fa-file &nbsp;&nbsp;\\]', result)
   end
 
   test 'sanitize_diagram handles parallelogram shape type 2 with text' do
     input = 'flowchart LR; A[\\fa:fa-file Output\\]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[\\&nbsp; fa:fa-file Output &nbsp;\\]', result)
+    assert_equal('flowchart LR; A[\\&nbsp; fa:fa-file Output &nbsp;&nbsp;\\]', result)
   end
 
   test 'sanitize_diagram handles trapezoid shape type 1 with no text' do
     input = 'flowchart LR; A[/fa:fa-bolt\\]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[/&nbsp; fa:fa-bolt &nbsp;\\]', result)
+    assert_equal('flowchart LR; A[/&nbsp; fa:fa-bolt &nbsp;&nbsp;\\]', result)
   end
 
   test 'sanitize_diagram handles trapezoid shape type 1 with text' do
     input = 'flowchart LR; A[/fa:fa-bolt Action\\]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[/&nbsp; fa:fa-bolt Action &nbsp;\\]', result)
+    assert_equal('flowchart LR; A[/&nbsp; fa:fa-bolt Action &nbsp;&nbsp;\\]', result)
   end
 
   test 'sanitize_diagram handles trapezoid shape type 2 with no text' do
     input = 'flowchart LR; A[\\fa:fa-warning/]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[\\&nbsp; fa:fa-warning &nbsp;/]', result)
+    assert_equal('flowchart LR; A[\\fa:fa-warning &nbsp;/]', result)
   end
 
   test 'sanitize_diagram handles trapezoid shape type 2 with text' do
     input = 'flowchart LR; A[\\fa:fa-warning Alert/]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A[\\&nbsp; fa:fa-warning Alert &nbsp;/]', result)
+    assert_equal('flowchart LR; A[\\fa:fa-warning Alert &nbsp;/]', result)
   end
 
   test 'sanitize_diagram handles asymmetrical flag shape with no text' do
     input = 'flowchart LR; A>fa:fa-flag]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A>&nbsp; fa:fa-flag&nbsp;&nbsp;]', result)
+    assert_equal('flowchart LR; A>&nbsp;&nbsp;fa:fa-flag&nbsp;&nbsp;&nbsp;]', result)
   end
 
   test 'sanitize_diagram handles asymmetrical flag shape with text' do
     input = 'flowchart LR; A>fa:fa-flag Flag]'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A>&nbsp; fa:fa-flag Flag&nbsp;&nbsp;]', result)
+    assert_equal('flowchart LR; A>&nbsp;&nbsp;fa:fa-flag Flag&nbsp;&nbsp;&nbsp;]', result)
   end
 
   test 'sanitize_diagram handles curly brace diamond shape with no text' do
     input = 'flowchart LR; A{fa:fa-question}'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A{&nbsp; fa:fa-question &nbsp;}', result)
+    assert_equal('flowchart LR; A{&nbsp;&nbsp;fa:fa-question &nbsp;}', result)
   end
 
-  test 'sanitize_diagram does not pad curly brace diamond shape with text' do
+  test 'sanitize_diagram handles curly brace diamond shape with text' do
     input = 'flowchart LR; A{fa:fa-question Decision}'
     result = sanitize_diagram('mermaid', input)
-    assert_equal('flowchart LR; A{fa:fa-question Decision}', result)
+    assert_equal('flowchart LR; A{fa:fa-question Decision &nbsp;&nbsp;}', result)
   end
 end
