@@ -666,4 +666,16 @@ Ref: posts.user_id > users.id // many-to-one')
     result = sanitize_diagram('mermaid', nil)
     assert_nil(result)
   end
+
+  test 'sanitize_diagram fixes missing word after FontAwesome icon in mermaid with arrow' do
+    input = 'flowchart LR; A>fa:fa-check]'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; A>&nbsp; fa:fa-check&nbsp;]', result)
+  end
+
+  test 'sanitize_diagram handles FontAwesome icon with text in arrow shape' do
+    input = 'flowchart LR; A>fa:fa-check Done]'
+    result = sanitize_diagram('mermaid', input)
+    assert_equal('flowchart LR; A>&nbsp; fa:fa-check Done&nbsp;]', result)
+  end
 end
