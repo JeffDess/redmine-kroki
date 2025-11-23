@@ -40,7 +40,12 @@
   overflow: visible;
 }
 
-.kroki.mermaid foreignObject:has(.fa) {
+.kroki.mermaid foreignObject:has(.fa),
+.kroki.mermaid foreignObject:has(.fab),
+.kroki.mermaid foreignObject:has(.fad),
+.kroki.mermaid foreignObject:has(.fal),
+.kroki.mermaid foreignObject:has(.far),
+.kroki.mermaid foreignObject:has(.fas) {
   width: 100%;
   transform: translateX(-8px);
 }

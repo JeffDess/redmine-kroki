@@ -12,7 +12,7 @@ Redmine::Plugin.register :redmine_kroki do
              'kroki_url' => 'http://kroki:8000',
              'dark_themes' => %w[dark dark-theme redmine-dark],
              'force_dark' => false,
-             'fontawesome_css' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+             'fontawesome_css' => 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css'
            },
            partial: 'settings/redmine-kroki_settings'
 
