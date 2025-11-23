@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../../lib/mermaid_icon_patterns'
+
 PLUGIN_OPTIONS = %i[max_width max_height].freeze
 
 # Utility functions for the Redmine-Kroki plugin
@@ -69,9 +71,9 @@ module RedmineKrokiHelper
     when 'nomnoml'
       diagram_content.tr("\r", "\n")
     when 'mermaid'
-      # HACK: Kroki doesn't correctly size boxes with icons but no text
-      copyless_icon_regex = /([(\[])fa:([\w-]+)\s*([)\]])/
-      diagram_content.gsub(copyless_icon_regex, '\1&nbsp; fa:\2 &nbsp;\3')
+      MERMAID_SHAPE_ICON_PATTERNS.reduce(diagram_content) do |result, pattern|
+        result.gsub(pattern[:regex], pattern[:replacement])
+      end
     else
       diagram_content
     end
