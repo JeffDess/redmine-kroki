@@ -16,6 +16,12 @@ if [ -n "$(git status --porcelain --untracked-files=no)" ]; then
 fi
 
 CURRENT=$(convco version)
+
+if ! convco check "v$CURRENT..HEAD"; then
+  echo "ERROR: Fix commit messages since v$CURRENT before bumping"
+  exit 1
+fi
+
 VERSION=$(convco version --bump "$@") || exit 1
 
 if [ "$VERSION" = "$CURRENT" ]; then

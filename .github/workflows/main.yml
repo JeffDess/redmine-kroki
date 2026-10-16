@@ -25,7 +25,6 @@ jobs:
   commit-messages:
     name: Commit messages
     runs-on: ubuntu-latest
-    if: github.ref_type == 'branch'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,7 +36,12 @@ jobs:
         env:
           BEFORE: ${{ github.event.before }}
         run: |
-          if [ "$GITHUB_REF_NAME" = main ]; then
+          if [ "$GITHUB_REF_TYPE" = tag ]; then
+            range="$GITHUB_SHA"
+            if previous=$(git describe --tags --abbrev=0 "$GITHUB_SHA^"); then
+              range="$previous..$GITHUB_SHA"
+            fi
+          elif [ "$GITHUB_REF_NAME" = main ]; then
             range="$BEFORE..$GITHUB_SHA"
             if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
               range="$GITHUB_SHA~1..$GITHUB_SHA"
@@ -69,7 +73,7 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     if: github.ref_type == 'tag'
-    needs: [lint, test-v5, test-v6]
+    needs: [lint, commit-messages, test-v5, test-v6]
 
     steps:
       - name: Checkout
