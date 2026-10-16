@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../../lib/kroki_block_indentation'
 require_relative '../../lib/mermaid_icon_patterns'
 
 PLUGIN_OPTIONS = %i[max_width max_height].freeze
@@ -66,6 +67,8 @@ module RedmineKrokiHelper
 
   def sanitize_diagram(diagram_type, diagram_content)
     return nil if diagram_content.nil?
+
+    diagram_content = KrokiBlockIndentation.restore(diagram_content)
 
     case diagram_type.downcase
     when 'nomnoml'

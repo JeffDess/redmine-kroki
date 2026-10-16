@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require_relative 'lib/kroki_block_indentation'
+
+ApplicationHelper.prepend(KrokiBlockIndentation::ApplicationHelperPatch)
+
 Redmine::Plugin.register :redmine_kroki do
   name 'Redmine Kroki Plugin'
   author 'Jean-François Dessureault'
