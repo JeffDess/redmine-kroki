@@ -1,8 +1,11 @@
-.PHONY: build diagrams halt lint restart run test test-stop test-ci watch
+.PHONY: build bump diagrams halt lint restart run test test-stop test-ci watch
 .DEFAULT_GOAL := build
 
 build:
 	docker compose build
+
+bump:
+	@./scripts/bump.sh $(ARGS)
 
 diagrams:
 	@./scripts/combine-diagrams.sh

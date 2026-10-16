@@ -1,3 +1,4 @@
 .direnv
 database/*
 
+.pre-commit-config.yaml

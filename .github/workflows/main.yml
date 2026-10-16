@@ -22,6 +22,31 @@ jobs:
           yamllint_config_filepath: .yamllint.yml
           yamllint_strict: true
 
+  commit-messages:
+    name: Commit messages
+    runs-on: ubuntu-latest
+    if: github.ref_type == 'branch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+      - name: Convco
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ "$GITHUB_REF_NAME" = main ]; then
+            range="$BEFORE..$GITHUB_SHA"
+            if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+              range="$GITHUB_SHA~1..$GITHUB_SHA"
+            fi
+          else
+            range="origin/main..HEAD"
+          fi
+          nix run .#convco -- check "$range"
+
   test-v5:
     name: Test Redmine 5
     runs-on: ubuntu-latest

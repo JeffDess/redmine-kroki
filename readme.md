@@ -246,6 +246,16 @@ If you run into other problems, please feel free to [open an issue](//github.com
   the command again to rerun it quickly.
 * When you are done, run `make test-stop` to kill the containers.
 
+### Release
+
+* Commit messages must follow [conventional commits](//www.conventionalcommits.org),
+  checked by a `commit-msg` hook installed by `nix develop` and in CI.
+* Run `make bump` from `main` to update the version in `src/init.rb`, commit
+  and tag it, based on the commit messages since the last tag.
+* Force the bump type with `make bump ARGS=--minor` (or `--major`, `--patch`).
+* Requires [convco](//github.com/convco/convco), provided by `nix develop`.
+* Push with `git push origin main vX.Y.Z` to publish the release.
+
 ## References
 
 * [Kroki.io](https://kroki.io/): Creates diagrams from textual descriptions!
