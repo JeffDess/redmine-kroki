@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require File.expand_path('../app/helpers/redmine_kroki_helper.rb', __dir__)
-require File.expand_path("#{File.dirname(__FILE__)}/../../../test/test_helper")
+require File.expand_path('../../app/helpers/redmine_kroki_helper.rb', __dir__)
+require File.expand_path('../../../../test/test_helper', __dir__)
 
 # Integration tests with Kroki Server
 class RedmineKrokiHelperTest < ActionView::TestCase

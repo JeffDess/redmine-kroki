@@ -11,7 +11,7 @@ fi
 docker compose -f compose.test.yml exec redmine sh -c "\
   bundle install && \
   bin/rails db:migrate RAILS_ENV=test && \
-  bundle exec rake test TEST=plugins/redmine_kroki/test/redmine_kroki_helper.rb
+  bin/rails test plugins/redmine_kroki/test
 "
 
 CODE=$?
