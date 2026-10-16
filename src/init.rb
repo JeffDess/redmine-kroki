@@ -8,7 +8,7 @@ Redmine::Plugin.register :redmine_kroki do
   name 'Redmine Kroki Plugin'
   author 'Jean-François Dessureault'
   description 'Render graphs in Redmine issues and wiki with Kroki'
-  version '0.4.0'
+  version '0.5.1'
   url 'https://github.com/jeffdess/redmine-kroki'
   author_url 'https://github.com/jeffdess'
 
