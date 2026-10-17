@@ -229,32 +229,57 @@ If you run into other problems, please feel free to [open an issue](//github.com
 
 ### Quickstart
 
-**Prerequisite**: Docker and Docker Compose installed
+Developing the plugin requires Docker with Docker Compose, plus
+[Nix](//nixos.org/download/) with flakes enabled (Linux, macOS or WSL). The
+dev shell provides the [lets](//github.com/JeffDess/lets) task runner along
+with the git hooks and every tool the tasks need.
+
+Without Nix, `docker compose` still runs the development environment, but no
+other task will be available.
+
+> [!TIP]
+> If you don't have Nix yet, these lines install it and enable flakes permanently:
+>
+> ```sh
+> curl -L https://nixos.org/nix/install | sh
+> mkdir -p ~/.config/nix
+> echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
+> ```
 
 1. Clone this repository
-2. Execute `make run`
-3. Visit:
+2. Enter the dev shell with `nix develop` (or `direnv allow` for automatic shell)
+3. Execute `lets run`
+4. Open Redmine with `lets browse 5` or `lets browse 6`, or visit:
    * Redmine 5: <http://localhost:8085>
    * Redmine 6: <http://localhost:8086>
 
+Run `lets --help` to list every task. Each one is also reachable outside of the
+dev shell, such as in `nix run .#test`.
+
 ### Tests
 
-* Tests can be run with `make test`.
+* Tests can be run with `lets test`.
 * It will spawn test containers so it won't interfere with your development
   environment.
 * These containers will keep running after the test has completed, so invoke
   the command again to rerun it quickly.
-* When you are done, run `make test-stop` to kill the containers.
+* When you are done, run `lets test --down` to kill the containers.
+* Run `lets watch` to rerun the tests whenever a Ruby file changes.
 
 ### Release
 
 * Commit messages must follow [conventional commits](//www.conventionalcommits.org),
-  checked by a `commit-msg` hook installed by `nix develop` and in CI.
-* Run `make bump` from `main` to update the version in `src/init.rb`, commit
-  and tag it, based on the commit messages since the last tag.
-* Force the bump type with `make bump ARGS=--minor` (or `--major`, `--patch`).
-* Requires [convco](//github.com/convco/convco), provided by `nix develop`.
-* Push with `git push origin main vX.Y.Z` to publish the release.
+  checked by a `commit-msg` hook installed by `nix develop` and in CI. `fixup!`
+  commits are accepted locally and on feature branches, but rejected when
+  pushing to `main`. Run `lets lint commits` to check the commits since the
+  last tag.
+* Run `lets version` from `main` to bump the version in `flake.nix` and
+  `src/init.rb`, regenerate `CHANGELOG.md`, commit and tag it, based on the
+  commit messages since the last tag.
+* Force the bump level with `lets version minor` (or `major`, `patch`), and
+  preview the result with `lets version --dry-run`.
+* Push with `git push --follow-tags`. The CI then runs `lets release` to
+  publish the GitHub release with the changelog notes and the plugin archive.
 
 ## References
 
